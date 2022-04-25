@@ -4,16 +4,25 @@ Food Truck Web App
 We are building a website for a food truck. Customers will be able to use the website to look up the food truck menu and where the truck is located. The food truck managers will be able to make changes to their inventory, employee schedules, change menus, and update food truck locations. Employees of the food truck will be able to check their schedule on the website.
 
 User Stories):
-As a customer I want to be able to easily view the menu from the main page.
-As a customer I want to know the location of the food truck at a specific time.
-As a customer I want to know the prices of the menu options.
+MVP
+As the customer I want to see menu items on the website
+As the customer I want to see the menu item description
+As the customer I want  to menu time price
+As the employer I want to be able to update a menu item.
+As the employer I want to be able to update the price of a menu item
+As the employer I want to be able to update the quantity of a menu item
+(stretch)Customer wants to know if menu item is DF/GF/NF
+(stretch)Employer can track the sales and see order history
 
-As an employee I want to be able to login and see when I am working.
-As an employee I want to be able to login and see where I am working.
+As the employer I want to update the inventory of dry goods
+As the employer I want dry goods to decrement (plate/napkins) as they are used
+As the employer I want to be able to add to inventory of dry goods
+As the employer I want to be able to see the price of dry goods(update price)
+(stretch) the employer wants to track costs/spending of dry goods and compare with sales
 
-As a manager, I want to be able to update the inventory.
-As a manager, I want to be able to update the work schedules.
-As a manager, I want to be able to update the price of an item.
-As a manager, I want to be able to see a list of my employees.
-As a manager, I want to be able to update my list of employees
-As a manager, I want to be able to add new menu items.
+Stretch
+As an employee I want to see my work location
+As an employee I want to be able to see my work schedule
+As an employer I want to be able to set and change a work schedule
+As a customer I want to be able to see the location of the food truck.
+
