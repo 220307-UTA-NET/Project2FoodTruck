@@ -1,5 +1,5 @@
 # Project2FoodTruck
-Food Truck Web App
+Food Truck Web App (Phirith)
 
 We are building a website for a food truck. Customers will be able to use the website to look up the food truck menu and where the truck is located. The food truck managers will be able to make changes to their inventory, employee schedules, change menus, and update food truck locations. Employees of the food truck will be able to check their schedule on the website.
 
