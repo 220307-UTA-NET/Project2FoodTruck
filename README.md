@@ -9,6 +9,7 @@ As a customer I want to know the location of the food truck at a specific time.
 As a customer I want to know the prices of the menu options.
 
 As an employee I want to be able to login and see when I am working.
+As an employee I want to be able to login and see where I am working.
 
 As a manager, I want to be able to update the inventory.
 As a manager, I want to be able to update the work schedules.
