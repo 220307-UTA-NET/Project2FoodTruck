@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodTruckDataAccessLibrary.Models
+namespace FoodTruckAPI.ClassLibrary.Models
+
 {
     public class Menu
     {
         public int ID { get; set; }
-        public string Menu1 { get; set; }
-        public string Menu2 { get; set; }
-        public string Menu3 { get; set; }
+        public string Main1 { get; set; }
+        public string Main2 { get; set; }
+        public string Main3 { get; set; }
         public string Drink1 { get; set; }
         public string Drink2 { get; set; }
         public string Side1 { get; set; }

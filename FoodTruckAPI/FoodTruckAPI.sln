@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodTruckAPI", "FoodTruckAPI\FoodTruckAPI.csproj", "{14A425DD-A2FD-4491-A142-26F5B316B4E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodTruckAPI", "FoodTruckAPI\FoodTruckAPI.csproj", "{14A425DD-A2FD-4491-A142-26F5B316B4E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodTruckDataAccessLibrary", "FoodTruckDataAccessLibrary\FoodTruckDataAccessLibrary.csproj", "{2C28EC09-B3F8-4215-8BAF-DED064CCC4EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodTruckAPI.ClassLibrary", "FoodTruckDataAccessLibrary\FoodTruckAPI.ClassLibrary.csproj", "{2C28EC09-B3F8-4215-8BAF-DED064CCC4EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

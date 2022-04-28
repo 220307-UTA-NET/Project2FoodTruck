@@ -1,4 +1,4 @@
-global using FoodTruckDataAccessLibrary.DataAccess;
+global using FoodTruckAPI.ClassLibrary.DataAccess;
 global using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

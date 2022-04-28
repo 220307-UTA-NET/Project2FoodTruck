@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodTruckDataAccessLibrary.Models
+namespace FoodTruckAPI.ClassLibrary.Models
 {
     public class Truck
     {

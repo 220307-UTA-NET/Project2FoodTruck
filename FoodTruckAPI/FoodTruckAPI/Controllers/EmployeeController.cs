@@ -1,4 +1,4 @@
-﻿using FoodTruckDataAccessLibrary.Models;
+﻿using FoodTruckAPI.ClassLibrary.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

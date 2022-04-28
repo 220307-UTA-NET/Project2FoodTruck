@@ -1,4 +1,4 @@
-﻿using FoodTruckDataAccessLibrary.Models;
+﻿using FoodTruckAPI.ClassLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodTruckDataAccessLibrary.DataAccess
-{
+namespace FoodTruckAPI.ClassLibrary.DataAccess
+{ 
     public class FoodTruckContext : DbContext
     {
-        public FoodTruckContext(DbContextOptions<FoodTruckContext> options) : base(options) { }
+        public FoodTruckContext(DbContextOptions options) : base(options) { }
 
         //this where we set-up our tables for SQL
         public DbSet<Employee> Employees { get; set; }
@@ -18,6 +18,16 @@ namespace FoodTruckDataAccessLibrary.DataAccess
         public DbSet<MenuItem> MenuItems { get; set; }
         public DbSet<Truck> Trucks { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelbuilder)
+        {
+
+            foreach (var relationship in modelbuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+
+            base.OnModelCreating(modelbuilder);
+        }
 
     }
 }
