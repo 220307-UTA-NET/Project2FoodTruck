@@ -10,9 +10,9 @@ namespace FoodTruckAPI.ClassLibrary.Models
     {
         public int ID { get; set; }
         public DateTime Day { get; set; }
-        public Menu menu { get; set; }
-        public Employee Emp1 { get; set; }
-        public Employee Emp2 { get; set; }
+        public int MenuID { get; set; }
+        public int EmpID1 { get; set; }
+        public int EmpID2 { get; set; }
         public string Location { get; set; }
 
     }

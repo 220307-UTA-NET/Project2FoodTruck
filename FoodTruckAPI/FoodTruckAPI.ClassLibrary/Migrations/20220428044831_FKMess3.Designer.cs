@@ -4,6 +4,7 @@ using FoodTruckAPI.ClassLibrary.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTruckAPI.ClassLibrary.Migrations
 {
     [DbContext(typeof(FoodTruckContext))]
-    partial class FoodTruckContextModelSnapshot : ModelSnapshot
+    [Migration("20220428044831_FKMess3")]
+    partial class FKMess3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,6 +139,8 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("MenuID");
+
                     b.ToTable("Trucks");
                 });
 
@@ -149,9 +153,20 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.Truck", b =>
+                {
+                    b.HasOne("FoodTruckAPI.ClassLibrary.Models.Menu", null)
+                        .WithMany("Trucks")
+                        .HasForeignKey("MenuID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.Menu", b =>
                 {
                     b.Navigation("Links");
+
+                    b.Navigation("Trucks");
                 });
 #pragma warning restore 612, 618
         }

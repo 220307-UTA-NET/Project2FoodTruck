@@ -42,7 +42,7 @@ namespace FoodTruckAPI.Controllers
         {
             var menuItem1 = await _ft.MenuItems.FindAsync(id);
             if (menuItem1 == null)
-                return BadRequest("Hero not found.");
+                return BadRequest("Menu item not found.");
             return Ok(menuItem1);
         }
 
@@ -85,12 +85,32 @@ namespace FoodTruckAPI.Controllers
         public async Task<ContentResult> UpdatePriceByID(MenuItem menuItem)
         {
             var menuItem1 = _ft.MenuItems.
-                            First(b => b.ID == menuItem.ID);
+                            First(b => b.MenuItemID == menuItem.MenuItemID);
 
             menuItem1.Price = menuItem.Price;
             _ft.SaveChanges();
 
             return new ContentResult() { StatusCode = 200 };
         }
+        [HttpDelete("{id}")]
+        public async Task<ContentResult> Delete(int id)
+        {
+            var menuItem1 = await _ft.MenuItems.FindAsync(id);
+            if (menuItem1 == null)
+                return new ContentResult()
+                {
+                    StatusCode = 400,
+                    Content="Item not found."
+                };
+
+            _ft.MenuItems.Remove(menuItem1);
+            await _ft.SaveChangesAsync();
+            return new ContentResult()
+            {
+                StatusCode = 200,
+                Content = "Item deleted."
+            };
+        }
+
     }
 }

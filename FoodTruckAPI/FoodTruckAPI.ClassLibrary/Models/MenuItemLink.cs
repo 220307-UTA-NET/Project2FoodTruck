@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FoodTruckAPI.ClassLibrary.Models
 {
-    public class MenuItem
+    public class MenuItemLink
     {
+        public int MenuItemLinkID { get; set; }       
+        public int MenuID { get; set; }    
         public int MenuItemID { get; set; }
-        public string FoodType { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
-        
-
     }
 }

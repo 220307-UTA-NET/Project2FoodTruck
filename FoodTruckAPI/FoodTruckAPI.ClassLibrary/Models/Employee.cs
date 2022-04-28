@@ -10,7 +10,7 @@ namespace FoodTruckAPI.ClassLibrary.Models
     public class Employee
     {
         [Required]
-        public int ID { get; set; }
+        public int EmployeeID { get; set; }
         [MaxLength(100)]
         public string Name { get; set; }
         [MaxLength (100)]
