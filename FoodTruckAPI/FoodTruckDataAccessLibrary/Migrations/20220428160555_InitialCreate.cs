@@ -52,7 +52,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
                     Drink1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Drink2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Side1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    side2 = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Side2 = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

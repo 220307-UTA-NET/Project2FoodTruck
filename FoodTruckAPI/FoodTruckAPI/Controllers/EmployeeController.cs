@@ -16,14 +16,14 @@ namespace FoodTruckAPI.Controllers
         }
         
             
-        [HttpGet("get/all/employees")]
-        public async Task<ActionResult<List<Employee>>> GetAllEmployees()
+        [HttpGet("see/all/employees")]
+        public async Task<ActionResult<List<Employee>>> SeeAllEmployees()
         {
             return Ok(await _foodTruckContext.Employees.ToListAsync());
         }
 
-        [HttpGet("get/employee{ID}")]
-        public async Task<ActionResult<Employee>> GetEmployee(int ID)
+        [HttpGet("see/employee{ID}")]
+        public async Task<ActionResult<Employee>> SeeEmployee(int ID)
         {
             var employee = await _foodTruckContext.Employees.FindAsync(ID);
             if (employee == null)

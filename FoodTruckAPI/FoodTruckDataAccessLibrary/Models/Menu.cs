@@ -16,7 +16,7 @@ namespace FoodTruckAPI.ClassLibrary.Models
         public string Drink1 { get; set; }
         public string Drink2 { get; set; }
         public string Side1 { get; set; }
-        public string side2 { get; set; }
+        public string Side2 { get; set; }
 
     }
 }
