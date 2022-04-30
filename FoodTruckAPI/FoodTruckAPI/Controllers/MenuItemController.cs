@@ -21,13 +21,13 @@ namespace FoodTruckAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ContentResult> Post(MenuItem menuItem)
+        public async Task<ActionResult<MenuItem>> Post(MenuItem menuItem)
         {
             try
             {
                 await _ft.AddRangeAsync(menuItem);
                 await _ft.SaveChangesAsync();
-                return new ContentResult() { StatusCode = 200 };
+                return menuItem;
             }
             catch { return new ContentResult() { StatusCode = 500 }; }
                      
@@ -69,6 +69,7 @@ namespace FoodTruckAPI.Controllers
             return Ok(menuItem1.ToList());
         }
 
+        // Won't be needed due to set up in angular currently
         [HttpPut("priceChangeName")]
         public async Task<ContentResult> UpdatePriceByName(MenuItem menuItem)
         {
@@ -108,7 +109,7 @@ namespace FoodTruckAPI.Controllers
             return new ContentResult()
             {
                 StatusCode = 200,
-                Content = "Item deleted."
+                ///Content = "Item deleted."
             };
         }
 

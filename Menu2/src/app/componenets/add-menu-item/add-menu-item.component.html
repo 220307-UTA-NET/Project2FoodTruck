@@ -1,0 +1,31 @@
+<button (click)="toggleMenuItemForm()" class="btn">Add New Item</button>
+<div *ngIf = "isDisplay" class="container">
+<form  #menuItemForm="ngForm" class="addMenuItem" (ngSubmit)="onSubmit(); menuItemForm.reset()">  
+    <h4>Add New Menu Item</h4> 
+    <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" required [(ngModel)]="name" name="name"  placeholder="Enter Menu Item Name"/>
+    </div>
+    <div>
+        <label for="price">Price</label>
+        <input type="number" name="price" required [(ngModel)]="price" id="price" placeholder="Enter a price"/>
+    </div>
+    <div>
+        <label for="foodType">Type of Food</label>
+        <select name="foodType" required [(ngModel)]="foodType" id="foodType">
+        <option value ="Main">Main Dish</option>
+        <option value ="Side">Side Dish</option>
+        <option calue ="Drink">Drink</option>
+        </select>
+    </div>
+    <div>
+        <label for="description">Description</label>
+        <input type="textarea" name="description" [(ngModel)]="description" id="description" placeholder="Add fun flavor text!"/>
+    </div>
+    <div>       
+        <input type="submit" value="Save" class="btn"[ngStyle]="{'background-color':'green'}" [disabled]="!name || !price || !foodType"/>
+        <input type="reset" value="Close" class="btn" [ngStyle]="{'background-color':'red'}" (click)="toggleMenuItemForm();menuItemForm.reset()"/>
+    </div>
+   
+</form>
+</div>

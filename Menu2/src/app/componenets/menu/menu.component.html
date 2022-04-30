@@ -1,0 +1,15 @@
+<div *ngIf="showMenuItems" >
+    <h4>All Menu Items</h4>
+    <div class="scroll">
+        <app-menu-item 
+        *ngFor="let menuItem of menuItems" 
+        [menuItem]="menuItem"
+        (onDeleteMenuItem)="deleteMenuItem(menuItem)"
+        (onPriceChange)="updatePrice(menuItem)">
+        </app-menu-item>
+    </div>
+<br>
+    <app-add-menu-item
+    (onAddMenuItem)="addMenuItem($event)">
+    </app-add-menu-item>
+

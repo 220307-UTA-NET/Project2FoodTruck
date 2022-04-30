@@ -22,29 +22,23 @@ namespace FoodTruckAPI.Controllers
 
         //Create a Menu - POST
         [HttpPost]
-        public async Task<IActionResult> Post(Menu menu)
-        {
-            //List<MenuItem> menu = new List<MenuItem>();
-            //for (int i = 0; i < menuAdds.Length; i++)
-            //{
-            //    int menuAdd = menuAdds[i];
-            //    menu.Add(await _ft.MenuItems.FindAsync(menuAdd));
-            //}
-            
+        public async Task<IActionResult> Post(List<MenuItem> menu, string MenuName)
+        {    
+            List<MenuItemLink> Links = new List<MenuItemLink>();
+            foreach (MenuItem item in menu)
+            {
+                Links.Add(new MenuItemLink()
+                {
+                    MenuItemID = item.MenuItemID,
+                });
+            }
             try
             {
-                //await _ft.AddRangeAsync(new Menu()
-                //{
-                //    Main1 = menu[0],
-                //    Main2 = menu[1],
-                //    Main3 = menu[2],
-                //    Drink1 = menu[3],
-                //    Drink2 = menu[4],
-                //    Side1 = menu[5],
-                //    Side2 = menu[6],
-
-                //});
-                await _ft.AddRangeAsync(menu);
+                await _ft.AddRangeAsync(new Menu()
+                {
+                    MenuName = MenuName,
+                    Links = Links
+                });
                 await _ft.SaveChangesAsync();
                 return new ContentResult() { StatusCode = 200 };
             }
@@ -52,6 +46,42 @@ namespace FoodTruckAPI.Controllers
         }
 
         //Update a Menu - PUT
+        [HttpPut]
+        public async Task<IActionResult> Put(List<MenuItem> menu, int id)
+        {
+            var menuList = (from m in _ft.MenuItems
+                            join n in _ft.MenuItemLinks
+                            on m.MenuItemID equals n.MenuItemID
+                            where n.MenuID == id
+                            select new
+                            {
+                                MenuItemID = m.MenuItemID,
+                                FoodType = m.FoodType,
+                                Name = m.Name,
+                                Description = m.Description,
+                                Price = m.Price
+                            }).ToList();
+
+            List<MenuItemLink> Links = new List<MenuItemLink>();
+            foreach (MenuItem item in menu)
+            {
+                Links.Add(new MenuItemLink()
+                {
+                    MenuItemID = item.MenuItemID,
+                });
+            }
+            try
+            {
+                await _ft.AddRangeAsync(new Menu()
+                {
+                   // MenuName = MenuName,
+                    Links = Links
+                });
+                await _ft.SaveChangesAsync();
+                return new ContentResult() { StatusCode = 200 };
+            }
+            catch { return new ContentResult() { StatusCode = 500 }; }
+        }
 
         //Get all menus -GET
 
