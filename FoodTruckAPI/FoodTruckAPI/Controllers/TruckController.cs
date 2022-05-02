@@ -36,7 +36,6 @@ namespace FoodTruckAPI.Controllers
             _foodTruckContext.Trucks.Add(truck);
             await _foodTruckContext.SaveChangesAsync();
             return Ok(await _foodTruckContext.Trucks.ToListAsync());
-
         }
 
         [HttpPut("change/truck{ID}")]
