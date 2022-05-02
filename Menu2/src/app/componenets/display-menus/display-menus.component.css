@@ -1,0 +1,16 @@
+.displayMenus{
+    text-indent:20px;
+    padding: 5px 10px;
+}
+
+.btn-delete{
+    color: rgb(255, 1, 1);
+    padding: 0px 3px;
+    margin: 1px;
+    transform: scale(.75);
+    text-align: center;
+    cursor: pointer;
+    float:right;
+}
+
+

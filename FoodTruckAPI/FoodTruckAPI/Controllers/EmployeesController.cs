@@ -1,0 +1,58 @@
+﻿using FoodTruckAPI.ClassLibrary.DataAccess;
+using FoodTruckAPI.ClassLibrary.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace FoodTruckAPI.Controllers
+{
+    [ApiController]
+    [Route ("api/[controller]")]
+    public class EmployeesController : Controller
+    {
+        private readonly ILogger<EmployeesController> _logger;
+        private readonly FoodTruckContext _ft;
+
+        public EmployeesController(ILogger<EmployeesController> logger, FoodTruckContext ft)
+        {
+            _logger = logger;
+            _ft = ft;
+        }
+
+
+        //GET ALL
+        [HttpGet("all")]
+        public async Task<ActionResult<Employee>> Get()
+        {
+            return Ok(await _ft.Employees.ToListAsync());
+        }
+
+
+        //GET by ID
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Employee>> Get(int id)
+        {          
+            var employee = await _ft.MenuItems.FindAsync(id);
+            if (employee == null)
+            { return BadRequest("Menu item not found."); }
+            else
+            { return Ok(employee); }
+        }
+
+        //POST
+        [HttpPost]
+        public async Task<ActionResult<Employee>> Post(Employee employee)
+        {
+            try
+            {
+                await _ft.AddRangeAsync(employee);
+                await _ft.SaveChangesAsync();
+                return employee;
+            }
+            catch { return new ContentResult() { StatusCode = 500 }; }
+
+        }
+
+        //DELETE
+
+    }
+}

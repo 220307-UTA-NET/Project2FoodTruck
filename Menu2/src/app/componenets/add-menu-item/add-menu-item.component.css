@@ -1,0 +1,23 @@
+.addMenu{
+    text-indent: 20px;
+    margin-left: 20px;
+
+    border-radius: 10px;
+}
+.btn{
+    margin-left: 24px;
+}
+
+form{
+    text-indent:25px;
+    margin: 15px 15px;
+}
+input{
+    margin: 5px 10px;
+}
+select{
+    margin: 5px 10px;
+}
+label{
+    padding-right: 6px;
+}
