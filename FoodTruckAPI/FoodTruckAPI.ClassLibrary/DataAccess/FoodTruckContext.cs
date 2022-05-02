@@ -17,6 +17,7 @@ namespace FoodTruckAPI.ClassLibrary.DataAccess
         public DbSet<MenuItem> MenuItems { get; set; }
         public DbSet<Truck> Trucks { get; set; }
         public DbSet<MenuItemLink> MenuItemLinks { get; set; }
+        public DbSet<EmployeeTruckLink> EmployeeTruckLinks { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelbuilder)
         //{

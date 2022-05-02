@@ -6,16 +6,57 @@ import { Observable, Subject } from 'rxjs';
 })
 export class UIService {
   private showMenuItems:boolean=false;
-  private subject=new Subject<any>();
+  private showMenus:boolean=false;
+  private showAddOptions:boolean=false;
+  private showEmployees:boolean=false;
+  private subject1=new Subject<any>();
+  private subject2=new Subject<any>();
+  private subject3=new Subject<any>();
+  private subject4=new Subject<any>();
 
   constructor() { }
 
   toggleShowMenuItems():void {
     this.showMenuItems=! this.showMenuItems;
-    this.subject.next(this.showMenuItems)
+    this.subject1.next(this.showMenuItems)
   }
 
-  onToggle(): Observable<any>{
-    return this.subject.asObservable();
+  toggleShowMenus():void {
+    this.showMenus=! this.showMenus;
+    this.subject2.next(this.showMenus);
   }
+  resetToggleShowMenus():void{
+    this.showMenus=false;
+    this.subject2.next(this.showMenus);
+  }
+
+  toggleShowAddOptions():void {
+    this.showAddOptions=!this.showAddOptions;
+    this.subject3.next(this.showAddOptions);
+  }
+  resetToggleShowAddOptions():void{
+    this.showAddOptions=false;
+    this.subject3.next(this.showAddOptions);
+  }
+
+  toggleShowEmployess():void{
+    this.showEmployees=!this.showEmployees;
+    this.subject4.next(this.showEmployees);
+  }
+
+  onToggleShowMenuItems(): Observable<any>{
+    return this.subject1.asObservable();
+  }
+
+  onToggleShowMenus(): Observable<any>{
+    return this.subject2.asObservable();
+  }
+
+  onToggleShowAddOptions():Observable<any>{
+    return this.subject3.asObservable();
+  }
+  onToggleShowEmployees():Observable<any>{
+    return this.subject4.asObservable();
+  }
+
 }

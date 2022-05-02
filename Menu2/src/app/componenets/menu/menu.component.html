@@ -1,15 +1,33 @@
+
 <div *ngIf="showMenuItems" >
-    <h4>All Menu Items</h4>
     <div class="scroll">
-        <app-menu-item 
+        <app-menu-item
         *ngFor="let menuItem of menuItems" 
         [menuItem]="menuItem"
         (onDeleteMenuItem)="deleteMenuItem(menuItem)"
-        (onPriceChange)="updatePrice(menuItem)">
+        (onPriceChange)="updatePrice(menuItem)"
+        (onAddToNewMenu)="addItemToNewMenu(menuItem)">
         </app-menu-item>
-    </div>
+</div>
+
+
+<div class="addOptions">
+<app-create-menu  
+    [menuItemList]="menuItemList"
+    (onSubmitMenu)="submitMenu($event)">
+</app-create-menu>
 <br>
-    <app-add-menu-item
+<app-add-menu-item 
     (onAddMenuItem)="addMenuItem($event)">
-    </app-add-menu-item>
+</app-add-menu-item>
+</div>
+<div class="scrollMenu">
+<app-display-menus 
+    *ngFor="let menu of menus"
+    [menu]="menu"
+    (onDeleteMenu)="deleteMenu(menu)"
+></app-display-menus>
+</div>
+
+
 

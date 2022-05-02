@@ -12,7 +12,5 @@ namespace FoodTruckAPI.ClassLibrary.Models
         public string MenuName { get; set; }
         public List<MenuItemLink> Links { get; set; }
     
-       
-
     }
 }

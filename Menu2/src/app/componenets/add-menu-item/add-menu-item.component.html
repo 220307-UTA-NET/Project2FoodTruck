@@ -1,7 +1,10 @@
+<div *ngIf="showAddOptions">
 <button (click)="toggleMenuItemForm()" class="btn">Add New Item</button>
-<div *ngIf = "isDisplay" class="container">
+<div *ngIf = "isDisplay" class="addMenuForms">
+    <fieldset class="addMenu">
+        <legend>Add Menu Item</legend>  
 <form  #menuItemForm="ngForm" class="addMenuItem" (ngSubmit)="onSubmit(); menuItemForm.reset()">  
-    <h4>Add New Menu Item</h4> 
+    
     <div>
         <label for="name">Name</label>
         <input type="text" id="name" required [(ngModel)]="name" name="name"  placeholder="Enter Menu Item Name"/>
@@ -28,4 +31,6 @@
     </div>
    
 </form>
+</fieldset>
+</div>
 </div>

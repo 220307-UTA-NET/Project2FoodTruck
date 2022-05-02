@@ -42,9 +42,11 @@ namespace FoodTruckAPI.Controllers
         {
             var menuItem1 = await _ft.MenuItems.FindAsync(id);
             if (menuItem1 == null)
-                return BadRequest("Menu item not found.");
-            return Ok(menuItem1);
+            { return BadRequest("Menu item not found."); }
+            else
+            { return Ok(menuItem1); }
         }
+            
 
         [HttpGet("name")]
         public async Task<ActionResult<MenuItem>> GetName(string Name)
@@ -109,7 +111,6 @@ namespace FoodTruckAPI.Controllers
             return new ContentResult()
             {
                 StatusCode = 200,
-                ///Content = "Item deleted."
             };
         }
 

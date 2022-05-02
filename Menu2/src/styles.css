@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-  max-width: 500px;
+  max-width: 650px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
@@ -25,7 +25,7 @@ body {
   color: #fff;
   border: none;
   padding: 10px 20px;
-  margin: 15px 0px;
+  margin: 15px 3px;
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
@@ -95,9 +95,9 @@ input[type="checkbox"]{
 
 }
 .ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid #42A948; /* green */
+  border-left: 7px solid #42A948; /* green */
 }
 
 .ng-invalid:not(form)  {
-  border-left: 5px solid #a94442; /* red */
+  border-left: 7px solid #a94442; /* red */
 }

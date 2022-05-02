@@ -1,0 +1,13 @@
+.createMenu{
+    text-indent: 20px;    
+}
+
+.menuName{
+    margin: 20px 65px;
+    transform: scale(1.5);
+   
+}
+.btn{
+    display:float;
+    margin-left: 25px;
+}

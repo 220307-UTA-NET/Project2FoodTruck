@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTruckAPI.ClassLibrary.Migrations
 {
     [DbContext(typeof(FoodTruckContext))]
-    [Migration("20220428045031_FKMess4")]
-    partial class FKMess4
+    [Migration("20220501141115_NewCreate")]
+    partial class NewCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,6 +45,27 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
                     b.HasKey("EmployeeID");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.EmployeeTruckLink", b =>
+                {
+                    b.Property<int>("EmployeeTruckLinkID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeTruckLinkID"), 1L, 1);
+
+                    b.Property<int>("EmployeeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TruckID")
+                        .HasColumnType("int");
+
+                    b.HasKey("EmployeeTruckLinkID");
+
+                    b.HasIndex("TruckID");
+
+                    b.ToTable("EmployeeTruckLinks");
                 });
 
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.Menu", b =>
@@ -115,20 +136,14 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.Truck", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("TruckID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TruckID"), 1L, 1);
 
                     b.Property<DateTime>("Day")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("EmpID1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmpID2")
-                        .HasColumnType("int");
 
                     b.Property<string>("Location")
                         .IsRequired()
@@ -137,9 +152,18 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
                     b.Property<int>("MenuID")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("TruckID");
 
                     b.ToTable("Trucks");
+                });
+
+            modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.EmployeeTruckLink", b =>
+                {
+                    b.HasOne("FoodTruckAPI.ClassLibrary.Models.Truck", null)
+                        .WithMany("workingEmployees")
+                        .HasForeignKey("TruckID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.MenuItemLink", b =>
@@ -154,6 +178,11 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.Menu", b =>
                 {
                     b.Navigation("Links");
+                });
+
+            modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.Truck", b =>
+                {
+                    b.Navigation("workingEmployees");
                 });
 #pragma warning restore 612, 618
         }

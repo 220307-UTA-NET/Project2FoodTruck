@@ -11,6 +11,7 @@ export class MenuItemComponent implements OnInit {
   @Input() menuItem!:MenuItem;
   @Output() onDeleteMenuItem: EventEmitter<MenuItem>=new EventEmitter();
   @Output() onPriceChange: EventEmitter<MenuItem>=new EventEmitter();
+  @Output() onAddToNewMenu: EventEmitter<MenuItem> =new EventEmitter();
   showPriceChangeForm=false;
   price!:number;
 
@@ -32,6 +33,8 @@ export class MenuItemComponent implements OnInit {
     this.price=0;
     this.onPriceChange.emit(menuItem);
   }
-  
+  addToNewMenu(menuItem:MenuItem){
+    this.onAddToNewMenu.emit(menuItem);
+  }
 
 }

@@ -22,7 +22,7 @@ namespace FoodTruckAPI.Controllers
 
         //Create a Menu - POST
         [HttpPost]
-        public async Task<IActionResult> Post(List<MenuItem> menu, string MenuName)
+        public async Task<ActionResult> Post(List<MenuItem> menu, string MenuName)
         {    
             List<MenuItemLink> Links = new List<MenuItemLink>();
             foreach (MenuItem item in menu)
@@ -40,7 +40,12 @@ namespace FoodTruckAPI.Controllers
                     Links = Links
                 });
                 await _ft.SaveChangesAsync();
-                return new ContentResult() { StatusCode = 200 };
+
+                var newMenu=_ft.Menus.LastAsync();
+
+                return Ok(newMenu);
+                    
+                   
             }
             catch { return new ContentResult() { StatusCode = 500 }; }
         }
@@ -97,7 +102,7 @@ namespace FoodTruckAPI.Controllers
             var menuList = (from m in _ft.MenuItems
                             join n in _ft.MenuItemLinks
                             on m.MenuItemID equals n.MenuItemID
-                            where n.MenuID == id
+                            where n.MenuID == id orderby m.FoodType
                             select new
                             {
                                 MenuItemID = m.MenuItemID,
@@ -107,11 +112,26 @@ namespace FoodTruckAPI.Controllers
                                 Price = m.Price
                             }).ToList();
 
-            foreach(var menu in menuList)
-            {
-                _logger.LogInformation($"{menu.Price}");
-            }
+            //menuList.OrderBy(p => p.FoodType);
             return Ok(menuList);         
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var menu = await _ft.Menus.FindAsync(id);
+            if (menu == null)
+                return new ContentResult()
+                {
+                    StatusCode = 400,
+                    Content = "Item not found."
+                };
+
+            _ft.Menus.Remove(menu);
+            await _ft.SaveChangesAsync();
+            return new ContentResult()
+            {
+                StatusCode = 200,
+            };
         }
 
     }

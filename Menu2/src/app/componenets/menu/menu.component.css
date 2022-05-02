@@ -1,4 +1,29 @@
 .scroll {
-    max-height: 200px;
+    max-height: 425px;
     overflow: auto;
+    width:40%;
+    float:left;
+    margin-left: 10px;
   }
+
+  .menu{
+    float: left;
+    text-align: center;
+    height: 470;
+    width:65%;
+    padding: 5px 10px;
+    
+  }
+
+  .addOptions{
+    float: left;
+  }
+
+  .scrollMenu {
+    max-height: 450px;
+    overflow: auto;
+    width:30%;
+    float:right;
+    margin-right: 20px;
+  }
+

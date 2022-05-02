@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FoodTruckAPI.ClassLibrary.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class NewCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,20 +21,6 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.EmployeeID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MenuItemLinks",
-                columns: table => new
-                {
-                    MenuItemLinkID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MenuMenuID = table.Column<int>(type: "int", nullable: false),
-                    MenuItemMenuItemID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MenuItemLinks", x => x.MenuItemLinkID);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,18 +56,66 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
                 name: "Trucks",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    TruckID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Day = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MenuMenuID = table.Column<int>(type: "int", nullable: false),
-                    EmpID1 = table.Column<int>(type: "int", nullable: false),
-                    EmpID2 = table.Column<int>(type: "int", nullable: false),
+                    MenuID = table.Column<int>(type: "int", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Trucks", x => x.ID);
+                    table.PrimaryKey("PK_Trucks", x => x.TruckID);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "MenuItemLinks",
+                columns: table => new
+                {
+                    MenuItemLinkID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MenuID = table.Column<int>(type: "int", nullable: false),
+                    MenuItemID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MenuItemLinks", x => x.MenuItemLinkID);
+                    table.ForeignKey(
+                        name: "FK_MenuItemLinks_Menus_MenuID",
+                        column: x => x.MenuID,
+                        principalTable: "Menus",
+                        principalColumn: "MenuID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EmployeeTruckLinks",
+                columns: table => new
+                {
+                    EmployeeTruckLinkID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeID = table.Column<int>(type: "int", nullable: false),
+                    TruckID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployeeTruckLinks", x => x.EmployeeTruckLinkID);
+                    table.ForeignKey(
+                        name: "FK_EmployeeTruckLinks_Trucks_TruckID",
+                        column: x => x.TruckID,
+                        principalTable: "Trucks",
+                        principalColumn: "TruckID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeeTruckLinks_TruckID",
+                table: "EmployeeTruckLinks",
+                column: "TruckID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MenuItemLinks_MenuID",
+                table: "MenuItemLinks",
+                column: "MenuID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -90,16 +124,19 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
                 name: "Employees");
 
             migrationBuilder.DropTable(
+                name: "EmployeeTruckLinks");
+
+            migrationBuilder.DropTable(
                 name: "MenuItemLinks");
 
             migrationBuilder.DropTable(
                 name: "MenuItems");
 
             migrationBuilder.DropTable(
-                name: "Menus");
+                name: "Trucks");
 
             migrationBuilder.DropTable(
-                name: "Trucks");
+                name: "Menus");
         }
     }
 }
