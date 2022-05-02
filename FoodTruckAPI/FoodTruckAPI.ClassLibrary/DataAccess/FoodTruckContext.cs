@@ -19,15 +19,10 @@ namespace FoodTruckAPI.ClassLibrary.DataAccess
         public DbSet<MenuItemLink> MenuItemLinks { get; set; }
         public DbSet<EmployeeTruckLink> EmployeeTruckLinks { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelbuilder)
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
-
-        //    foreach (var relationship in modelbuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-        //    {
-        //        relationship.DeleteBehavior = DeleteBehavior.Restrict;
-        //    }
-
-        //    base.OnModelCreating(modelbuilder);
+        //    modelBuilder.HasDefaultSchema("blogging");
         //}
 
     }
