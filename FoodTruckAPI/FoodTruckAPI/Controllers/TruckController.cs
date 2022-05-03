@@ -1,0 +1,98 @@
+﻿using FoodTruckAPI.ClassLibrary.DataAccess;
+using FoodTruckAPI.ClassLibrary.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace FoodTruckAPI.Controllers
+{
+
+    [ApiController]
+    [Route("api/[controller]")]
+    public class TruckController : Controller
+    {
+        private readonly ILogger<EmployeesController> _logger;
+        private readonly FoodTruckContext _ft;
+
+        public TruckController(ILogger<EmployeesController> logger, FoodTruckContext ft)
+        {
+            _logger = logger;
+            _ft = ft;
+        }
+
+
+        //GETALL
+        [HttpGet("all")]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await _ft.Trucks.ToListAsync());
+        }
+
+        //GETACTIVE TRUCK
+        [HttpGet("{isActive}")]
+        public async Task<ActionResult<Truck>> GetActive(bool isActive)
+        {
+            var truck = _ft.Trucks
+            .Where(b => b.IsActive == isActive)
+            .FirstOrDefault<Truck>();
+            if (truck == null)
+                return BadRequest("menuItem not found.");
+            return Ok(truck);
+        }
+
+        //POST
+        [HttpPost]
+        public async Task<ActionResult<Truck>> Post(TruckEmployeeListDTO data)
+        {
+            List<EmployeeTruckLink> Links = new List<EmployeeTruckLink>();
+            foreach (Employee e in data.employees)
+            {
+                Links.Add(new EmployeeTruckLink()
+                {
+                    EmployeeID = e.EmployeeID,
+                });
+            }
+
+            var truck = new Truck()
+            {
+                Day = data.date,
+                MenuID = data.menuID,
+                workingEmployees = Links,
+                Location = data.location,
+                IsActive = false
+            };
+
+            try
+            {
+                await _ft.Trucks.AddRangeAsync(truck);
+                await _ft.SaveChangesAsync();
+                return truck;
+            }
+            catch { return new ContentResult() { StatusCode = 500 }; }
+        }
+
+        //PUT (CHANGE STATUS OF ISACTIVE
+        [HttpPut]
+        public async Task<ActionResult<Truck>>Put(Truck truck)
+        {
+            var truckActive = _ft.Trucks.
+                            First(b => b.TruckID == truck.TruckID);
+
+            truckActive.IsActive = true;
+            _ft.SaveChanges();
+
+            var trucksInactive = _ft.Trucks.
+                            Where(b => b.TruckID != truck.TruckID);
+            foreach (var t in trucksInactive)
+            {
+                t.IsActive = false;
+                _ft.SaveChanges();
+            }
+            return new ContentResult() { StatusCode = 200 };
+        }
+
+
+        //DELETE
+
+
+    }
+}

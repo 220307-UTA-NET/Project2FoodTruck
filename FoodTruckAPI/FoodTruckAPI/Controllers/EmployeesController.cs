@@ -53,6 +53,24 @@ namespace FoodTruckAPI.Controllers
         }
 
         //DELETE
+        [HttpDelete("{id}")]
+        public async Task<ContentResult> Delete(int id)
+        {
+            var employee = await _ft.Employees.FindAsync(id);
+            if (employee == null)
+                return new ContentResult()
+                {
+                    StatusCode = 400,
+                    Content = "Employee not found."
+                };
+
+            _ft.Employees.Remove(employee);
+            await _ft.SaveChangesAsync();
+            return new ContentResult()
+            {
+                StatusCode = 200,
+            };
+        }
 
     }
 }

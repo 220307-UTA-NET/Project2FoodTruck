@@ -1,7 +1,7 @@
 .scroll {
     max-height: 425px;
     overflow: auto;
-    width:40%;
+    width:35%;
     float:left;
     margin-left: 10px;
   }

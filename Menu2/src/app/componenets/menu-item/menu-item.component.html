@@ -1,7 +1,8 @@
-<h3>{{menuItem.name}} ${{menuItem.price}}<small>  -{{menuItem.description}}</small></h3>
-<button class= "btn-small"(click)="onDelete(menuItem)">Delete</button>
+
+<h5>{{menuItem.name}} ${{menuItem.price}}<small>  -{{menuItem.description}}</small></h5>
+<button name="addToNewMenu" class="btn-small"(click)="addToNewMenu(menuItem)"> Add to Menu</button> 
 <button class="btn-small" (click)="toggleShowPriceChangeForm()">Update Price</button>
-<input type="checkbox" name="addToNewMenu" (click)="addToNewMenu(menuItem)"> <label>  Add to Menu</label> 
+<button class= "btn-small"(click)="onDelete(menuItem)">Delete</button>
 <div *ngIf="showPriceChangeForm">
     <form #priceChange="ngForm">
         <input type="number" name="price" [(ngModel)]="price" id="price" placeholder="Enter a price"/>

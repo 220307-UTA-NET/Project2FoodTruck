@@ -17,6 +17,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("foodtruck")
                 .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -42,7 +43,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
                     b.HasKey("EmployeeID");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", "foodtruck");
                 });
 
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.EmployeeTruckLink", b =>
@@ -63,7 +64,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
                     b.HasIndex("TruckID");
 
-                    b.ToTable("EmployeeTruckLinks");
+                    b.ToTable("EmployeeTruckLinks", "foodtruck");
                 });
 
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.Menu", b =>
@@ -80,7 +81,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
                     b.HasKey("MenuID");
 
-                    b.ToTable("Menus");
+                    b.ToTable("Menus", "foodtruck");
                 });
 
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.MenuItem", b =>
@@ -108,7 +109,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
                     b.HasKey("MenuItemID");
 
-                    b.ToTable("MenuItems");
+                    b.ToTable("MenuItems", "foodtruck");
                 });
 
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.MenuItemLink", b =>
@@ -129,7 +130,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
                     b.HasIndex("MenuID");
 
-                    b.ToTable("MenuItemLinks");
+                    b.ToTable("MenuItemLinks", "foodtruck");
                 });
 
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.Truck", b =>
@@ -143,6 +144,9 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
                     b.Property<DateTime>("Day")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -152,7 +156,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
                     b.HasKey("TruckID");
 
-                    b.ToTable("Trucks");
+                    b.ToTable("Trucks", "foodtruck");
                 });
 
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.EmployeeTruckLink", b =>

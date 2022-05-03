@@ -2,7 +2,8 @@
     <div class="scroll">
         <app-employee 
         *ngFor="let employee of employees" 
-                [employee]="employee">
+        [employee]="employee"
+        (onDeleteEmployee)="deleteEmployee(employee)">
         </app-employee>
     </div>
 
