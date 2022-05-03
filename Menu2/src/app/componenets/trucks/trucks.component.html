@@ -1,0 +1,12 @@
+<div *ngIf="showTrucks" >
+    <div class="scroll">
+        <app-truck 
+        *ngFor="let truck of trucks" 
+        [truck]="truck"
+        (onDeleteTruck)="deleteTruck(truck)">
+        </app-truck>
+    </div>
+
+<div class="addTruck">
+    <app-add-truck (onAddNewTruck)="addNewTruck()"></app-add-truck></div>
+</div>

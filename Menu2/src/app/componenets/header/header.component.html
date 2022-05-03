@@ -1,0 +1,30 @@
+<header>
+    <h6>Employee Only Section</h6>
+    <app-button     
+    *ngIf="!showEmployees"
+    text="{{showMenuItems? '^ Menu Items':'Menu Items'}}" 
+    (btnClick)="toggleMenuItems()"
+    (btnClick)="resetShowAddOptions()"
+    (btnClick)="resetShowMenus()">
+    </app-button>
+
+    <app-add-options-button
+    *ngIf="showMenuItems"
+    text="{{showAddOptions? '^ Add Item or Create Menu':'Add Item or Create Menu'}}" 
+    (btnClickAddOptions)="toggleAddOptions()">
+    </app-add-options-button>
+    
+    <app-display-menus-button 
+    *ngIf="showMenuItems"
+    text="{{showMenus? '^ Menus': 'Menus'}}" 
+    (btnClickMenus)="toggleMenus()">
+    </app-display-menus-button>
+
+    <app-employees-button
+    *ngIf="!showMenuItems"
+    text="{{showEmployees? '^ Employees': 'Employees'}}" 
+    (btnClickEmployees)="toggleEmployees()">
+    </app-employees-button>
+
+    <!--ADD TRUCK BUTTON HERE-->
+</header>

@@ -1,0 +1,21 @@
+
+<table class="displayMenus" *ngIf="showMenus">
+    <tbody>   
+    <div class="eachMenu">  
+        <td>   
+        <input type="checkbox" class="btn-small"(click)="displayOneMenu(menu)"/>
+        </td>
+        <td style="width:175px">{{menu.menuName}}</td>  
+        <td>
+        <button class="btn-delete" (click)="deleteMenu(menu)">delete</button>
+        </td>
+    </div>
+
+    <div *ngIf="displayingOneMenu" >        
+        <div *ngFor="let menuItem of menuItems">
+        {{menuItem.name}}- ${{menuItem.price}}
+        </div>
+    </div>
+</tbody> 
+</table>
+

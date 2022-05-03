@@ -1,0 +1,19 @@
+
+    <form #newMenu="ngForm" *ngIf="showAddOptions">
+        <input type="text" name = "menuName" required [(ngModel)]="menuName" placeholder="Menu Name" class="menuName">
+        <table *ngFor="let menuItem of menuItemList" class="createMenu">      
+        <tbody>
+            <td style="width: 215px">{{menuItem.foodType}} {{menuItem.name}}</td>
+            <td><button class="btn-small" (click)="removeItem(menuItem)">remove</button></td>
+        </tbody>
+        </table>
+
+        <div>
+        <input type="button" (click)="submitMenu();newMenu.reset()" value="Submit Menu" 
+        [disabled]="!menuName || menuItemList.length<7" class="btn"[ngStyle]="{'margin-left':'24px'}"/>
+        </div>
+    </form>
+
+    
+
+
