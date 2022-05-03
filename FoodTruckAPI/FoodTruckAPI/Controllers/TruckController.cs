@@ -20,13 +20,13 @@ namespace FoodTruckAPI.Controllers
         }
 
 
-        //GETALL
+        //GET ALL
         [HttpGet("all")]
-        public async Task<IActionResult> Get()
+        public async Task<ActionResult<Truck>> Get()
         {
             return Ok(await _ft.Trucks.ToListAsync());
         }
-
+        
         //GETACTIVE TRUCK
         [HttpGet("{isActive}")]
         public async Task<ActionResult<Truck>> GetActive(bool isActive)
@@ -37,6 +37,17 @@ namespace FoodTruckAPI.Controllers
             if (truck == null)
                 return BadRequest("menuItem not found.");
             return Ok(truck);
+         }
+         
+        //GET by ID
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Truck>> Get(int id)
+        {
+            var truck1 = await _ft.Trucks.FindAsync(id);
+            if (truck1 == null)
+            { return BadRequest("Truck not found."); }
+            else
+            { return Ok(truck1); }
         }
 
         //POST
@@ -92,7 +103,23 @@ namespace FoodTruckAPI.Controllers
 
 
         //DELETE
+        [HttpDelete("{id}")]
+        public async Task<ContentResult> Delete(int id)
+        {
+            var truck1 = await _ft.Trucks.FindAsync(id);
+            if (truck1 == null)
+                return new ContentResult()
+                {
+                    StatusCode = 400,
+                    Content = "Truck not found."
+                };
 
-
+            _ft.Trucks.Remove(truck1);
+            await _ft.SaveChangesAsync();
+            return new ContentResult()
+            {
+                StatusCode = 200,
+            };
+        }
     }
 }
