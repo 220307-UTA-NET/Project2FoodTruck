@@ -33,7 +33,7 @@ namespace FoodTruckAPI.Controllers
         {          
             var employee = await _ft.MenuItems.FindAsync(id);
             if (employee == null)
-            { return BadRequest("Menu item not found."); }
+            { return BadRequest("Employeee not found."); }
             else
             { return Ok(employee); }
         }

@@ -1,10 +1,13 @@
 ﻿using FoodTruckAPI.ClassLibrary.DataAccess;
 using FoodTruckAPI.ClassLibrary.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.Entity;
 
 namespace FoodTruckAPI.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class TruckController : Controller
     {
 
@@ -37,17 +40,13 @@ namespace FoodTruckAPI.Controllers
 
         //POST
         [HttpPost]
-        public async Task<ContentResult> Post(Truck truck)
+        public async Task<ActionResult<Truck>> Post(Truck truck)
         {
             try
             {
                 await _ft.AddRangeAsync(truck);
                 await _ft.SaveChangesAsync();
-                return new ContentResult()
-                {
-                    StatusCode = 200,
-                };
-
+                return truck;
             }
             catch { return new ContentResult() { StatusCode = 500 }; }
 

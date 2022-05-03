@@ -20,10 +20,5 @@ namespace FoodTruckAPI.ClassLibrary.DataAccess
         public DbSet<EmployeeTruckLink> EmployeeTruckLinks { get; set; }
 
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.HasDefaultSchema("blogging");
-        //}
-
     }
 }
