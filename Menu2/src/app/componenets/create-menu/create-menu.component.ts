@@ -30,6 +30,11 @@ export class CreateMenuComponent implements OnInit {
       this.onSubmitMenu.emit(this.menuName);
     }
 
+  removeItem(menuItem:MenuItem)
+  {
+    this.menuItemList.splice(this.menuItemList.indexOf(menuItem),1)
+  }
+
 
 
 }

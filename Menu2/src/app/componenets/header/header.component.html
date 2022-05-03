@@ -1,5 +1,5 @@
 <header>
-    <h1>{{title}}</h1>
+    <h6>Employee Only Section</h6>
     <app-button     
     *ngIf="!showEmployees"
     text="{{showMenuItems? '^ Menu Items':'Menu Items'}}" 
@@ -24,6 +24,7 @@
     *ngIf="!showMenuItems"
     text="{{showEmployees? '^ Employees': 'Employees'}}" 
     (btnClickEmployees)="toggleEmployees()">
-
     </app-employees-button>
+
+    <!--ADD TRUCK BUTTON HERE-->
 </header>

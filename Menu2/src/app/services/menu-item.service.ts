@@ -50,6 +50,12 @@ export class MenuItemService {
     const url =`${this.menuUrl}/${menu.menuID}`;
     return this.http.get<MenuItem[]>(url)
   }
+  getMenuTest():Observable<MenuItem[]>{
+    const url =`${this.menuUrl}/1`;
+    console.log(url);
+    return this.http.get<MenuItem[]>(url);
+    
+  }
   deleteMenu(menu:Menu):Observable<Menu>{
     const url=`${this.menuUrl}/${menu.menuID}`;
     return this.http.delete<Menu>(url);

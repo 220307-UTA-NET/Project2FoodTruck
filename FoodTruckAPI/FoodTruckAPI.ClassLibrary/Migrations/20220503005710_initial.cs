@@ -5,12 +5,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FoodTruckAPI.ClassLibrary.Migrations
 {
-    public partial class NewCreate : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "foodtruck");
+
             migrationBuilder.CreateTable(
                 name: "Employees",
+                schema: "foodtruck",
                 columns: table => new
                 {
                     EmployeeID = table.Column<int>(type: "int", nullable: false)
@@ -25,6 +29,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
             migrationBuilder.CreateTable(
                 name: "MenuItems",
+                schema: "foodtruck",
                 columns: table => new
                 {
                     MenuItemID = table.Column<int>(type: "int", nullable: false)
@@ -41,6 +46,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Menus",
+                schema: "foodtruck",
                 columns: table => new
                 {
                     MenuID = table.Column<int>(type: "int", nullable: false)
@@ -54,6 +60,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Trucks",
+                schema: "foodtruck",
                 columns: table => new
                 {
                     TruckID = table.Column<int>(type: "int", nullable: false)
@@ -69,6 +76,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
             migrationBuilder.CreateTable(
                 name: "MenuItemLinks",
+                schema: "foodtruck",
                 columns: table => new
                 {
                     MenuItemLinkID = table.Column<int>(type: "int", nullable: false)
@@ -82,6 +90,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
                     table.ForeignKey(
                         name: "FK_MenuItemLinks_Menus_MenuID",
                         column: x => x.MenuID,
+                        principalSchema: "foodtruck",
                         principalTable: "Menus",
                         principalColumn: "MenuID",
                         onDelete: ReferentialAction.Cascade);
@@ -89,6 +98,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
             migrationBuilder.CreateTable(
                 name: "EmployeeTruckLinks",
+                schema: "foodtruck",
                 columns: table => new
                 {
                     EmployeeTruckLinkID = table.Column<int>(type: "int", nullable: false)
@@ -102,6 +112,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
                     table.ForeignKey(
                         name: "FK_EmployeeTruckLinks_Trucks_TruckID",
                         column: x => x.TruckID,
+                        principalSchema: "foodtruck",
                         principalTable: "Trucks",
                         principalColumn: "TruckID",
                         onDelete: ReferentialAction.Cascade);
@@ -109,11 +120,13 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmployeeTruckLinks_TruckID",
+                schema: "foodtruck",
                 table: "EmployeeTruckLinks",
                 column: "TruckID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MenuItemLinks_MenuID",
+                schema: "foodtruck",
                 table: "MenuItemLinks",
                 column: "MenuID");
         }
@@ -121,22 +134,28 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Employees",
+                schema: "foodtruck");
 
             migrationBuilder.DropTable(
-                name: "EmployeeTruckLinks");
+                name: "EmployeeTruckLinks",
+                schema: "foodtruck");
 
             migrationBuilder.DropTable(
-                name: "MenuItemLinks");
+                name: "MenuItemLinks",
+                schema: "foodtruck");
 
             migrationBuilder.DropTable(
-                name: "MenuItems");
+                name: "MenuItems",
+                schema: "foodtruck");
 
             migrationBuilder.DropTable(
-                name: "Trucks");
+                name: "Trucks",
+                schema: "foodtruck");
 
             migrationBuilder.DropTable(
-                name: "Menus");
+                name: "Menus",
+                schema: "foodtruck");
         }
     }
 }

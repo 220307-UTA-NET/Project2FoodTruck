@@ -4,10 +4,15 @@
 
 .menuName{
     margin: 20px 65px;
-    transform: scale(1.5);
+    transform: scale(1.2);
    
 }
 .btn{
     display:float;
     margin-left: 25px;
+}
+
+.btn-small{
+    margin-left: 2rem;
+    
 }

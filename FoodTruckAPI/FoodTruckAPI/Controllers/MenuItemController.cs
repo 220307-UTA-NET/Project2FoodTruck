@@ -30,7 +30,7 @@ namespace FoodTruckAPI.Controllers
                 return menuItem;
             }
             catch { return new ContentResult() { StatusCode = 500 }; }
-                     
+
         }
         [HttpGet("all")]
         public async Task<ActionResult<List<MenuItem>>> Get()

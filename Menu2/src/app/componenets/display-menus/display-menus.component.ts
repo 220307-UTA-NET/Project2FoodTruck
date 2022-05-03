@@ -14,7 +14,6 @@ import { KeyValue } from '@angular/common';
 export class DisplayMenusComponent implements OnInit {
   @Input() menu!:Menu;
   menuItems!:MenuItem[];
-  sortedMenuItems!:MenuItem[];
   showMenus!:boolean;
   subscription!:Subscription;
   displayingOneMenu:boolean=false;

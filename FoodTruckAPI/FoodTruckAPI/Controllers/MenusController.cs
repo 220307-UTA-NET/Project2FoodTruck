@@ -32,20 +32,18 @@ namespace FoodTruckAPI.Controllers
                     MenuItemID = item.MenuItemID,
                 });
             }
+
+            var menuAdd = new Menu()
+            {
+                MenuName = MenuName,
+                Links = Links
+            };
+
             try
             {
-                await _ft.AddRangeAsync(new Menu()
-                {
-                    MenuName = MenuName,
-                    Links = Links
-                });
+                await _ft.AddRangeAsync(menuAdd);
                 await _ft.SaveChangesAsync();
-
-                var newMenu=_ft.Menus.LastAsync();
-
-                return Ok(newMenu);
-                    
-                   
+                return Ok(menuAdd);                                    
             }
             catch { return new ContentResult() { StatusCode = 500 }; }
         }

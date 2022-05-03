@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Employee } from 'src/app/Employee';
 
 @Component({
@@ -8,14 +8,16 @@ import { Employee } from 'src/app/Employee';
 })
 export class EmployeeComponent implements OnInit {
   @Input() employee!:Employee;
+  @Output() onDeleteEmployee:EventEmitter<Employee>=new EventEmitter();
  
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onDelete(employee:Employee){
-    
+  onDelete(employee:Employee)
+  {
+    this.onDeleteEmployee.emit(employee);
   }
 
 }
