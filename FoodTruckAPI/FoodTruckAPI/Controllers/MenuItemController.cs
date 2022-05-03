@@ -1,75 +1,118 @@
-﻿using FoodTruckAPI.ClassLibrary.Models;
-using Microsoft.AspNetCore.Http;
+using FoodTruckAPI.ClassLibrary.DataAccess;
+using FoodTruckAPI.ClassLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodTruckAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class MenuItemController : ControllerBase
     {
-        private readonly FoodTruckContext _foodTruckContext;
+   
 
-        public MenuItemController(FoodTruckContext foodTruckContext)
+        private readonly ILogger<MenuItemController> _logger;
+        private readonly FoodTruckContext _ft;
+
+        public MenuItemController(ILogger<MenuItemController> logger, FoodTruckContext ft)
         {
-            _foodTruckContext = foodTruckContext;
+            _logger = logger;
+            _ft = ft;
         }
 
-        [HttpGet("see/all/menuItem")]
-        public async Task<ActionResult<List<MenuItem>>> SeeAllMenuItems()
+        [HttpPost]
+        public async Task<ActionResult<MenuItem>> Post(MenuItem menuItem)
         {
-            return Ok(await _foodTruckContext.MenuItems.ToListAsync());
-        }
-
-        [HttpGet("see/menuItem{ID}")]
-        public async Task<ActionResult<MenuItem>> SeeMenuItem(int ID)
-        {
-            var menuitem = await _foodTruckContext.MenuItems.FindAsync(ID);
-            if (menuitem == null)
-                return BadRequest("Cannot find item. Please try again.");
-            return Ok(menuitem);
-        }
-
-        [HttpPost("create/menuItem")]
-        public async Task<ActionResult<List<MenuItem>>> CreateMenuItem(MenuItem menuitem)
-        {
-            _foodTruckContext.MenuItems.Add(menuitem);
-            await _foodTruckContext.SaveChangesAsync();
-            return Ok(await _foodTruckContext.MenuItems.ToListAsync());
+            try
+            {
+                await _ft.AddRangeAsync(menuItem);
+                await _ft.SaveChangesAsync();
+                return menuItem;
+            }
+            catch { return new ContentResult() { StatusCode = 500 }; }
 
         }
-
-        [HttpPut("update/menuItem{ID}")]
-        public async Task<ActionResult<List<MenuItem>>> UpdateMenuItem(MenuItem request)
+        [HttpGet("all")]
+        public async Task<ActionResult<List<MenuItem>>> Get()
         {
-            var dbMenuItem = await _foodTruckContext.MenuItems.FindAsync(request.ID);
-            if (dbMenuItem == null)
-                return BadRequest("Cannot find item. Please try again.");
+            return Ok(await _ft.MenuItems.ToListAsync());
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<MenuItem>> Get(int id)
+        {
+            var menuItem1 = await _ft.MenuItems.FindAsync(id);
+            if (menuItem1 == null)
+            { return BadRequest("Menu item not found."); }
+            else
+            { return Ok(menuItem1); }
+        }
+            
 
-            dbMenuItem.FoodType = request.FoodType;
-            dbMenuItem.Name = request.Name;
-            dbMenuItem.Description = request.Description;
-            dbMenuItem.Price = request.Price;
-
-            await _foodTruckContext.SaveChangesAsync();
-
-            return Ok(await _foodTruckContext.MenuItems.ToListAsync());
+        [HttpGet("name")]
+        public async Task<ActionResult<MenuItem>> GetName(string Name)
+        {
+            var menuItem1 = _ft.MenuItems
+                        .Where(b => b.Name == Name)
+                        .FirstOrDefault<MenuItem>();
+            if (menuItem1 == null)
+                return BadRequest("menuItem not found.");
+            return Ok(menuItem1);
         }
 
-        [HttpDelete("delete/menuItem{ID}")]
-        public async Task<ActionResult<List<MenuItem>>> DeleteMenuItem(int ID)
+        [HttpGet("foodtype")]
+        public async Task<ActionResult<MenuItem>> GetFoodType(string FoodType)
         {
-            var dbMenuItem = await _foodTruckContext.MenuItems.FindAsync(ID);
-            if (dbMenuItem == null)
-                return BadRequest("Cannot find employee. Please try again.");
 
-            _foodTruckContext.MenuItems.Remove(dbMenuItem);
-            await _foodTruckContext.SaveChangesAsync();
+            var menuItem1 = _ft.MenuItems
+                        .Where(b => b.FoodType == FoodType);
+                       
+            if (menuItem1 == null)
+                return BadRequest("menuItem not found.");
+            return Ok(menuItem1.ToList());
+        }
 
-            return Ok(await _foodTruckContext.MenuItems.ToListAsync());
+        // Won't be needed due to set up in angular currently
+        [HttpPut("priceChangeName")]
+        public async Task<ContentResult> UpdatePriceByName(MenuItem menuItem)
+        {
+            var menuItem1 = _ft.MenuItems.
+                            First(b => b.Name == menuItem.Name);
+
+            menuItem1.Price = menuItem.Price;
+            _ft.SaveChanges();
+
+            return new ContentResult() { StatusCode = 200 };
+        }
+
+        [HttpPut("priceChangeID")]
+        public async Task<ContentResult> UpdatePriceByID(MenuItem menuItem)
+        {
+            var menuItem1 = _ft.MenuItems.
+                            First(b => b.MenuItemID == menuItem.MenuItemID);
+
+            menuItem1.Price = menuItem.Price;
+            _ft.SaveChanges();
+
+            return new ContentResult() { StatusCode = 200 };
+        }
+        [HttpDelete("{id}")]
+        public async Task<ContentResult> Delete(int id)
+        {
+            var menuItem1 = await _ft.MenuItems.FindAsync(id);
+            if (menuItem1 == null)
+                return new ContentResult()
+                {
+                    StatusCode = 400,
+                    Content="Item not found."
+                };
+
+            _ft.MenuItems.Remove(menuItem1);
+            await _ft.SaveChangesAsync();
+            return new ContentResult()
+            {
+                StatusCode = 200,
+            };
         }
 
     }
 }
-
-

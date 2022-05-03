@@ -1,37 +1,32 @@
-global using FoodTruckAPI.ClassLibrary.DataAccess;
-global using Microsoft.EntityFrameworkCore;
+using FoodTruckAPI.ClassLibrary.DataAccess;
+using Microsoft.EntityFrameworkCore;
 
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
-                                              
+                          policy.WithOrigins("http://localhost:4200")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
                       });
 });
 
-
-builder.Services.AddResponseCaching();
 builder.Services.AddControllers();
-builder.Services.AddDbContext<FoodTruckContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
-
-});
-
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<FoodTruckContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+});
+
 var app = builder.Build();
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseRouting();
-
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -41,9 +36,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseRouting();
 app.UseCors(MyAllowSpecificOrigins);
-
 app.UseAuthorization();
 
 app.MapControllers();

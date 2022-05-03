@@ -1,71 +1,125 @@
-﻿using FoodTruckAPI.ClassLibrary.Models;
-using Microsoft.AspNetCore.Http;
+﻿using FoodTruckAPI.ClassLibrary.DataAccess;
+using FoodTruckAPI.ClassLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodTruckAPI.Controllers
 {
-    [Route("api/[controller]")]
+
     [ApiController]
-    public class TruckController : ControllerBase
+    [Route("api/[controller]")]
+    public class TruckController : Controller
     {
-        private readonly FoodTruckContext _foodTruckContext;
+        private readonly ILogger<EmployeesController> _logger;
+        private readonly FoodTruckContext _ft;
 
-        public TruckController(FoodTruckContext foodTruckContext)
+        public TruckController(ILogger<EmployeesController> logger, FoodTruckContext ft)
         {
-            _foodTruckContext = foodTruckContext;
+            _logger = logger;
+            _ft = ft;
         }
 
-        [HttpGet("see/all/truck")]
-        public async Task<ActionResult<List<Truck>>> SeeAllTrucks()
-        {
-            return Ok(await _foodTruckContext.Trucks.ToListAsync());
-        }
 
-        [HttpGet("see/truck{ID}")]
-        public async Task<ActionResult<Truck>> SeeTruck(int ID)
+        //GET ALL
+        [HttpGet("all")]
+        public async Task<ActionResult<Truck>> Get()
         {
-            var truck = await _foodTruckContext.MenuItems.FindAsync(ID);
+            return Ok(await _ft.Trucks.ToListAsync());
+        }
+        
+        //GETACTIVE TRUCK
+        [HttpGet("{isActive}")]
+        public async Task<ActionResult<Truck>> GetActive(bool isActive)
+        {
+            var truck = _ft.Trucks
+            .Where(b => b.IsActive == isActive)
+            .FirstOrDefault<Truck>();
             if (truck == null)
-                return BadRequest("Cannot find truck. Please try again.");
+                return BadRequest("menuItem not found.");
             return Ok(truck);
+         }
+         
+        //GET by ID
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Truck>> Get(int id)
+        {
+            var truck1 = await _ft.Trucks.FindAsync(id);
+            if (truck1 == null)
+            { return BadRequest("Truck not found."); }
+            else
+            { return Ok(truck1); }
         }
 
-        [HttpPost("create/truck")]
-        public async Task<ActionResult<List<Truck>>> CreateTruck(Truck truck)
+        //POST
+        [HttpPost]
+        public async Task<ActionResult<Truck>> Post(TruckEmployeeListDTO data)
         {
-            _foodTruckContext.Trucks.Add(truck);
-            await _foodTruckContext.SaveChangesAsync();
-            return Ok(await _foodTruckContext.Trucks.ToListAsync());
+            List<EmployeeTruckLink> Links = new List<EmployeeTruckLink>();
+            foreach (Employee e in data.employees)
+            {
+                Links.Add(new EmployeeTruckLink()
+                {
+                    EmployeeID = e.EmployeeID,
+                });
+            }
+
+            var truck = new Truck()
+            {
+                Day = data.date,
+                MenuID = data.menuID,
+                workingEmployees = Links,
+                Location = data.location,
+                IsActive = false
+            };
+
+            try
+            {
+                await _ft.Trucks.AddRangeAsync(truck);
+                await _ft.SaveChangesAsync();
+                return truck;
+            }
+            catch { return new ContentResult() { StatusCode = 500 }; }
         }
 
-        [HttpPut("change/truck{ID}")]
-        public async Task<ActionResult<List<Truck>>> ChangeTruck(Truck request)
+        //PUT (CHANGE STATUS OF ISACTIVE
+        [HttpPut]
+        public async Task<ActionResult<Truck>>Put(Truck truck)
         {
-            var dbTruck = await _foodTruckContext.Trucks.FindAsync(request.ID);
-            if (dbTruck == null)
-                return BadRequest("Cannot find truck. Please try again.");
+            var truckActive = _ft.Trucks.
+                            First(b => b.TruckID == truck.TruckID);
 
-            dbTruck.Day = request.Day;
-            dbTruck.MenuID = request.MenuID;
-            dbTruck.Employee1 = request.Employee1;
-            dbTruck.Employee2 = request.Employee2;
+            truckActive.IsActive = true;
+            _ft.SaveChanges();
 
-            await _foodTruckContext.SaveChangesAsync();
-
-            return Ok(await _foodTruckContext.Trucks.ToListAsync());
+            var trucksInactive = _ft.Trucks.
+                            Where(b => b.TruckID != truck.TruckID);
+            foreach (var t in trucksInactive)
+            {
+                t.IsActive = false;
+                _ft.SaveChanges();
+            }
+            return new ContentResult() { StatusCode = 200 };
         }
 
-        [HttpDelete("delete/truck{ID}")]
-        public async Task<ActionResult<List<Truck>>> DeleteTruck(int ID)
+
+        //DELETE
+        [HttpDelete("{id}")]
+        public async Task<ContentResult> Delete(int id)
         {
-            var dbTruck = await _foodTruckContext.Trucks.FindAsync(ID);
-            if (dbTruck == null)
-                return BadRequest("Cannot find truck. Please try again.");
+            var truck1 = await _ft.Trucks.FindAsync(id);
+            if (truck1 == null)
+                return new ContentResult()
+                {
+                    StatusCode = 400,
+                    Content = "Truck not found."
+                };
 
-            _foodTruckContext.Trucks.Remove(dbTruck);
-            await _foodTruckContext.SaveChangesAsync();
-
-            return Ok(await _foodTruckContext.Trucks.ToListAsync());
+            _ft.Trucks.Remove(truck1);
+            await _ft.SaveChangesAsync();
+            return new ContentResult()
+            {
+                StatusCode = 200,
+            };
         }
     }
 }
