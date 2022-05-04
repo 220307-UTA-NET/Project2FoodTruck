@@ -66,18 +66,7 @@ namespace FoodTruckAPI.Controllers
                              }).ToList();
 
             return Ok(employees);
-         }
-         
-        //GET by ID
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Truck>> Get(int id)
-        //{
-        //    var truck1 = await _ft.Trucks.FindAsync(id);
-        //    if (truck1 == null)
-        //    { return BadRequest("Truck not found."); }
-        //    else
-        //    { return Ok(truck1); }
-        //}
+        }
 
         //POST
         [HttpPost]
