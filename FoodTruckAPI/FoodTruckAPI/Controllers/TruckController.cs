@@ -19,7 +19,6 @@ namespace FoodTruckAPI.Controllers
             _ft = ft;
         }
 
-
         //GET ALL
         [HttpGet("all")]
         public async Task<ActionResult<Truck>> Get()

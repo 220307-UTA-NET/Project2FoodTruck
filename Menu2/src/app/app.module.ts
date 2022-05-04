@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 
+
 import { AppComponent } from './app.component';
 import { MenuItemComponent } from './componenets/menu-item/menu-item.component';
 import { MenuComponent } from './componenets/menu/menu.component';
@@ -30,6 +31,8 @@ import { TruckComponent } from './componenets/truck/truck.component';
 import { MenuPageComponent } from './pages/menu-page/menu-page.component';
 import { EmployeePageComponent } from './pages/employee-page/employee-page.component';
 import { TruckButtonComponent } from './componenets/truck-button/truck-button.component';
+import { EmployeePortalComponent } from './pages/employee-portal/employee-portal.component';
+
 
 @NgModule({
   declarations: [
@@ -57,6 +60,9 @@ import { TruckButtonComponent } from './componenets/truck-button/truck-button.co
     MenuPageComponent,
     EmployeePageComponent,
     TruckButtonComponent
+    EmployeePortalComponent,
+    
+
     
   ],
   imports: [
@@ -67,6 +73,7 @@ import { TruckButtonComponent } from './componenets/truck-button/truck-button.co
     AppRoutingModule,
     ReactiveFormsModule,
     CommonModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
