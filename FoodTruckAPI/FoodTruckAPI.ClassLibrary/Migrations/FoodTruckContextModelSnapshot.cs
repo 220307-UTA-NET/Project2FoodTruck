@@ -63,7 +63,7 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
 
                     b.HasIndex("TruckID");
 
-                    b.ToTable("EmployeeTruckLinks", "foodtruck");
+                    b.ToTable("EmployeeTruckLinks", "foodtruck");             
                 });
 
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.Menu", b =>
@@ -159,15 +159,6 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
                     b.ToTable("Trucks", "foodtruck");
                 });
 
-            modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.EmployeeTruckLink", b =>
-                {
-                    b.HasOne("FoodTruckAPI.ClassLibrary.Models.Truck", null)
-                        .WithMany("workingEmployees")
-                        .HasForeignKey("TruckID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.MenuItemLink", b =>
                 {
                     b.HasOne("FoodTruckAPI.ClassLibrary.Models.Menu", null)
@@ -180,11 +171,6 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.Menu", b =>
                 {
                     b.Navigation("Links");
-                });
-
-            modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.Truck", b =>
-                {
-                    b.Navigation("workingEmployees");
                 });
 #pragma warning restore 612, 618
         }
