@@ -1,3 +1,6 @@
-<h3>{{employee.name}} {{employee.phoneNumber}}</h3>
-<button class= "btn-small"(click)="onDelete(employee)">Delete</button>
-
+<div class="addEmp">
+    <tr>
+        <td style="width:300px"><h5>{{employee.name}} {{employee.phoneNumber}}</h5></td>
+        <td><button class="btn-small"(click)="onDelete(employee)">Delete</button></td>
+    </tr>
+</div>

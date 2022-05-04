@@ -15,17 +15,19 @@ export class DisplayMenusComponent implements OnInit {
   @Input() menu!:Menu;
   menuItems!:MenuItem[];
   showMenus!:boolean;
+  showTrucks!:boolean;
   subscription!:Subscription;
   displayingOneMenu:boolean=false;
   @Output() onDeleteMenu: EventEmitter<Menu>=new EventEmitter();
 
 
   constructor(private menuItemService: MenuItemService, private uiService:UIService) { 
-    this.subscription=this.uiService.onToggleShowMenus().subscribe(value=> this.showMenus=value);
-    
+
   }
 
   ngOnInit(): void {
+    this.subscription=this.uiService.onToggleShowMenus().subscribe(value=> this.showMenus=value);
+    this.subscription=this.uiService.onToggleShowTrucks().subscribe(value=> this.showTrucks=value);
   }
 
   resetDisplayingOneMenu()

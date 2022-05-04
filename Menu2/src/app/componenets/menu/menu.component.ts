@@ -20,13 +20,14 @@ export class MenuComponent implements OnInit {
   subscription!:Subscription;
 
   constructor(private menuItemService: MenuItemService, private uiService:UIService) { 
-    this.subscription=this.uiService.onToggleShowMenuItems().subscribe(value=> this.showMenuItems=value)
-    this.subscription=this.uiService.onToggleShowMenus().subscribe(value=> this.showMenus=value);
+    
   }
 
   ngOnInit(): void {
     this.menuItemService.getMenuItems().subscribe((menuItems)=>this.menuItems=menuItems);
     this.menuItemService.getMenus().subscribe((menus)=>this.menus=menus);
+    this.subscription=this.uiService.onToggleShowMenuItems().subscribe(value=> this.showMenuItems=value)
+    this.subscription=this.uiService.onToggleShowMenus().subscribe(value=> this.showMenus=value);
   }
 
   deleteMenuItem(menuItem: MenuItem){

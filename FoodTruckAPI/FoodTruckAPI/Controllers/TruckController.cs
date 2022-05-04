@@ -28,15 +28,44 @@ namespace FoodTruckAPI.Controllers
         }
 
         //GETACTIVE TRUCK
-        [HttpGet("{isActive}")]
-        public async Task<ActionResult<Truck>> GetActive(bool isActive)
+        [HttpGet("{IsActive}")]
+        public async Task<ActionResult<MenuItem>> GetActive(bool IsActive)
         {
-            var truck = _ft.Trucks
-            .Where(b => b.IsActive == isActive)
-            .FirstOrDefault<Truck>();
-            if (truck == null)
-                return BadRequest("menuItem not found.");
-            return Ok(truck);
+                              
+            var menuItems=(from a in _ft.Trucks
+                            join b in _ft.MenuItemLinks on a.MenuID equals b.MenuID
+                            join c in _ft.MenuItems on b.MenuItemID equals c.MenuItemID
+                            where a.IsActive==true orderby c.FoodType
+                           select new
+                            {
+                                MenuItemID = c.MenuItemID,
+                                FoodType = c.FoodType,
+                                Name = c.Name,
+                                Description = c.Description,
+                                Price = c.Price
+                            }).ToList();
+
+
+            if (menuItems == null)
+                return BadRequest("menuItems not found.");
+            return Ok(menuItems);
+        }
+
+        [HttpGet("employees{id}")]
+        public async Task<ActionResult<Employee>> GetTruckEmployees(int id)
+        {
+            var employees = (from m in _ft.Employees
+                             join n in _ft.EmployeeTruckLinks
+                             on m.EmployeeID equals n.EmployeeID
+                             where n.TruckID == id
+                             select new
+                             {
+                                 EmployeeID = m.EmployeeID,
+                                 Name = m.Name,
+                                 PhoneNumber = m.PhoneNumber,
+                             }).ToList();
+
+            return Ok(employees);
         }
 
         //POST
@@ -71,22 +100,26 @@ namespace FoodTruckAPI.Controllers
         }
 
         //PUT (CHANGE STATUS OF ISACTIVE
-        [HttpPut]
-        public async Task<ActionResult<Truck>>Put(Truck truck)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Truck>>Put(int id)
         {
             var truckActive = _ft.Trucks.
-                            First(b => b.TruckID == truck.TruckID);
+                            First(b => b.TruckID == id);
 
-            truckActive.IsActive = true;
-            _ft.SaveChanges();
+            truckActive.IsActive = true;         
 
             var trucksInactive = _ft.Trucks.
-                            Where(b => b.TruckID != truck.TruckID);
+                            Where(b => b.TruckID != id);
             foreach (var t in trucksInactive)
             {
                 t.IsActive = false;
-                _ft.SaveChanges();
+                
             }
+            _ft.SaveChanges();
+
+            //var allTrucks = _ft.Trucks;
+           
+            //return Ok(allTrucks);
             return new ContentResult() { StatusCode = 200 };
         }
 

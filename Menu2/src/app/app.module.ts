@@ -27,9 +27,9 @@ import { NavbarComponent } from './sharedpage/navbar/navbar.component';
 import { FooterComponent } from './sharedpage/footer/footer.component';
 import { TrucksComponent } from './componenets/trucks/trucks.component';
 import { TruckComponent } from './componenets/truck/truck.component';
-import { AddTruckComponent } from './componenets/add-truck/add-truck.component';
 import { MenuPageComponent } from './pages/menu-page/menu-page.component';
 import { EmployeePageComponent } from './pages/employee-page/employee-page.component';
+import { TruckButtonComponent } from './componenets/truck-button/truck-button.component';
 
 @NgModule({
   declarations: [
@@ -54,9 +54,9 @@ import { EmployeePageComponent } from './pages/employee-page/employee-page.compo
     FooterComponent,
     TrucksComponent,
     TruckComponent,
-    AddTruckComponent,
     MenuPageComponent,
-    EmployeePageComponent
+    EmployeePageComponent,
+    TruckButtonComponent
     
   ],
   imports: [

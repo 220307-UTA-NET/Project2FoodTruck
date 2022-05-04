@@ -12,10 +12,12 @@ import { Employee } from 'src/app/Employee';
 export class EmployeesComponent implements OnInit {
   employees!: Employee[];
   showEmployees!:boolean;
+  showTrucks!:boolean;
   subscription!:Subscription;
 
   constructor(private uiService:UIService, private employeeService:EmployeeService) { 
     this.subscription=this.uiService.onToggleShowEmployees().subscribe(value=>this.showEmployees=value);
+    this.subscription=this.uiService.onToggleShowTrucks().subscribe(value=>this.showTrucks=value);
   }
 
   ngOnInit(): void {
