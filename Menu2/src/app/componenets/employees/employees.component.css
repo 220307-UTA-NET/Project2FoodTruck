@@ -4,6 +4,7 @@
     width:400px;
     display: inline-block;
     margin-left: 10px;
+    vertical-align: top;
   }
 
 .addEmployee{
