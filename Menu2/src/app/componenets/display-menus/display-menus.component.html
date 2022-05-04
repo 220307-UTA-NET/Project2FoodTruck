@@ -1,7 +1,8 @@
 
-<table class="displayMenus" *ngIf="showMenus">
+<table class="displayMenus" *ngIf="showMenus || showTrucks">
     <tbody>   
     <div class="eachMenu">  
+        <tr>
         <td>   
         <input type="checkbox" class="btn-small"(click)="displayOneMenu(menu)"/>
         </td>
@@ -9,6 +10,7 @@
         <td>
         <button class="btn-delete" (click)="deleteMenu(menu)">delete</button>
         </td>
+        </tr>
     </div>
 
     <div *ngIf="displayingOneMenu" >        

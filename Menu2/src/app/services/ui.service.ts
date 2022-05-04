@@ -9,10 +9,12 @@ export class UIService {
   private showMenus:boolean=false;
   private showAddOptions:boolean=false;
   private showEmployees:boolean=false;
+  private showTrucks:boolean=false;
   private subject1=new Subject<any>();
   private subject2=new Subject<any>();
   private subject3=new Subject<any>();
   private subject4=new Subject<any>();
+  private subject5=new Subject<any>();
 
   constructor() { }
 
@@ -34,11 +36,14 @@ export class UIService {
     this.showAddOptions=!this.showAddOptions;
     this.subject3.next(this.showAddOptions);
   }
+  toggleShowTrucks():void{
+    this.showTrucks=!this.showTrucks;
+    this.subject5.next(this.showTrucks);
+  }
   resetToggleShowAddOptions():void{
     this.showAddOptions=false;
     this.subject3.next(this.showAddOptions);
   }
-
   toggleShowEmployess():void{
     this.showEmployees=!this.showEmployees;
     this.subject4.next(this.showEmployees);
@@ -57,6 +62,9 @@ export class UIService {
   }
   onToggleShowEmployees():Observable<any>{
     return this.subject4.asObservable();
+  }
+  onToggleShowTrucks():Observable<any>{
+    return this.subject5.asObservable();
   }
 
 }

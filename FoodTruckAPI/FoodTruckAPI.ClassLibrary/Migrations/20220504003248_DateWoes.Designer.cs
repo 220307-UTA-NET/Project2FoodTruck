@@ -3,6 +3,7 @@ using FoodTruckAPI.ClassLibrary.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTruckAPI.ClassLibrary.Migrations
 {
     [DbContext(typeof(FoodTruckContext))]
-    partial class FoodTruckContextModelSnapshot : ModelSnapshot
+    [Migration("20220504003248_DateWoes")]
+    partial class DateWoes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,6 +62,8 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("EmployeeTruckLinkID");
+
+                    b.HasIndex("TruckID");
 
                     b.ToTable("EmployeeTruckLinks", "foodtruck");
                 });
@@ -157,6 +161,15 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
                     b.ToTable("Trucks", "foodtruck");
                 });
 
+            modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.EmployeeTruckLink", b =>
+                {
+                    b.HasOne("FoodTruckAPI.ClassLibrary.Models.Truck", null)
+                        .WithMany("workingEmployees")
+                        .HasForeignKey("TruckID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.MenuItemLink", b =>
                 {
                     b.HasOne("FoodTruckAPI.ClassLibrary.Models.Menu", null)
@@ -169,6 +182,11 @@ namespace FoodTruckAPI.ClassLibrary.Migrations
             modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.Menu", b =>
                 {
                     b.Navigation("Links");
+                });
+
+            modelBuilder.Entity("FoodTruckAPI.ClassLibrary.Models.Truck", b =>
+                {
+                    b.Navigation("workingEmployees");
                 });
 #pragma warning restore 612, 618
         }

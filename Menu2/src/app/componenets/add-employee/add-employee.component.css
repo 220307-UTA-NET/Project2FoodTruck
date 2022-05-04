@@ -1,14 +1,9 @@
 
 input{
     margin: 15px 25px;
-    transform: scale(1.2);
-}
-fieldset{
-    padding: 25px 30px;
-    border-radius: 10px;
-}
 
+}
 .addEmployee{
     float:right;
-    margin-right:25%
+    margin-right:10%
 }

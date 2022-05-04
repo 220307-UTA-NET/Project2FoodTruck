@@ -1,6 +1,7 @@
 .displayMenus{
     text-indent:20px;
     padding: 5px 10px;
+    float:left;
 }
 
 .btn-delete{

@@ -3,6 +3,8 @@ import { Employee } from '../Employee';
 import { Truck } from '../Trucks';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { TruckDTO } from '../TruckDTO';
+import { MenuItem } from '../MenuItem';
 
 const httpOptions ={
   headers: new HttpHeaders({
@@ -15,8 +17,8 @@ const httpOptions ={
 })
 export class EmployeeService {
 
-  private employeeUrl ='https://localhost:7210/api/Employees';
-  private truckUrl='https://localhost:7210/api/Trucks';
+  private employeeUrl ='http://footruckapi.azurewebsites.net/api/Employees';
+  private truckUrl='http://footruckapi.azurewebsites.net/api/Truck';
 
   constructor(private http:HttpClient) { }
 
@@ -34,8 +36,24 @@ export class EmployeeService {
     return this.http.delete<Employee>(url);
   }
 
+  getWorkersByTruck(truck:Truck):Observable<Employee[]>{
+    const url =`${this.truckUrl}/employees${truck.truckID}`;
+    return this.http.get<Employee[]>(url);
+  }
+
   getTrucks():Observable<Truck[]>{
     const url=`${this.truckUrl}/all`;
     return this.http.get<Truck[]>(url);
+  }
+  createTruck(newTruck:TruckDTO):Observable<Truck>{
+    return this.http.post<Truck>(this.truckUrl, newTruck, httpOptions);
+  }
+  setTruckToActive(truck:Truck):Observable<Truck[]>{
+    const url =`${this.truckUrl}/${truck.truckID}`;
+    return this.http.put<Truck[]>(url, httpOptions);
+  }
+
+  getTruckIsActive():Observable<MenuItem[]>{
+    return this.http.get<MenuItem[]>(`${this.truckUrl}/true`);
   }
 }
