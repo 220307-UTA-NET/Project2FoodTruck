@@ -14,8 +14,8 @@ const httpOptions ={
   providedIn: 'root'
 })
 export class MenuItemService {
-  private menuItemUrl = 'https://localhost:7210/api/MenuItem'
-  private menuUrl ='https://localhost:7210/api/Menus'
+  private menuItemUrl = 'http://footruckapi.azurewebsites.net/api/MenuItem'
+  private menuUrl ='http://footruckapi.azurewebsites.net/api/Menus'
 
 
   constructor(private http:HttpClient) { }
@@ -49,6 +49,12 @@ export class MenuItemService {
   getOneMenu(menu:Menu):Observable<MenuItem[]>{
     const url =`${this.menuUrl}/${menu.menuID}`;
     return this.http.get<MenuItem[]>(url)
+  }
+  getMenuTest():Observable<MenuItem[]>{
+    const url =`${this.menuUrl}/1`;
+    console.log(url);
+    return this.http.get<MenuItem[]>(url);
+    
   }
   deleteMenu(menu:Menu):Observable<Menu>{
     const url=`${this.menuUrl}/${menu.menuID}`;

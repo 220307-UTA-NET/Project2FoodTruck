@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { CommonModule } from '@angular/common';
+
 
 import { AppComponent } from './app.component';
 import { MenuItemComponent } from './componenets/menu-item/menu-item.component';
@@ -18,6 +21,17 @@ import { EmployeesComponent } from './componenets/employees/employees.component'
 import { EmployeesButtonComponent } from './componenets/employees-button/employees-button.component';
 import { EmployeeComponent } from './componenets/employee/employee.component';
 import { AddEmployeeComponent } from './componenets/add-employee/add-employee.component';
+import { AboutComponent } from './pages/about/about.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NavbarComponent } from './sharedpage/navbar/navbar.component';
+import { FooterComponent } from './sharedpage/footer/footer.component';
+import { TrucksComponent } from './componenets/trucks/trucks.component';
+import { TruckComponent } from './componenets/truck/truck.component';
+import { MenuPageComponent } from './pages/menu-page/menu-page.component';
+import { EmployeePageComponent } from './pages/employee-page/employee-page.component';
+import { TruckButtonComponent } from './componenets/truck-button/truck-button.component';
+import { EmployeePortalComponent } from './pages/employee-portal/employee-portal.component';
 
 
 @NgModule({
@@ -36,13 +50,30 @@ import { AddEmployeeComponent } from './componenets/add-employee/add-employee.co
     EmployeesButtonComponent,
     EmployeeComponent,
     AddEmployeeComponent,
+    AboutComponent,
+    ContactComponent,
+    HomeComponent,
+    NavbarComponent,
+    FooterComponent,
+    TrucksComponent,
+    TruckComponent,
+    MenuPageComponent,
+    EmployeePageComponent,
+    TruckButtonComponent,
+    EmployeePortalComponent,
+    
+
     
   ],
   imports: [
     BrowserModule,
     HttpClientModule, 
     FormsModule,
-    RouterModule
+    RouterModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    CommonModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 .btn{
-    float:left;
-    margin-left: 30%;
-    background-color: mediumvioletred;
+    display:inline-block;
+    width: 25%;
+    margin-left: 20%;
 }

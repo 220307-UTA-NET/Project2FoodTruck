@@ -19,16 +19,22 @@ export class CreateMenuComponent implements OnInit {
  
 
   constructor(private uiService:UIService) { 
-    this.subscription=this.uiService.onToggleShowAddOptions().subscribe(value=> this.showAddOptions=value);
+    
   }
 
   ngOnInit(): void {
+    this.subscription=this.uiService.onToggleShowAddOptions().subscribe(value=> this.showAddOptions=value);
   }
 
   submitMenu()
     {
       this.onSubmitMenu.emit(this.menuName);
     }
+
+  removeItem(menuItem:MenuItem)
+  {
+    this.menuItemList.splice(this.menuItemList.indexOf(menuItem),1)
+  }
 
 
 
