@@ -1,0 +1,24 @@
+<form *ngIf="showAddTask"class="add-form" (ngSubmit)="onSubmit()">
+    <div class="form-control">
+        <label for="Foodtype">Foodtype</label>
+        <input type="text" name="Foodtype" id="FoodType" [(ngModel)]="FoodType" placeholder="Add Foodtype"/>
+    </div>
+    <div class="form-control">
+        <label for="Name">Name</label>
+        <input type="text" name="Name" id="name" [(ngModel)]="Name" placeholder="Add Name"/>
+    </div>
+    <div class="form-control">
+        <label for="Description">Description</label>
+        <input type="text" name="Description" id="Description" [(ngModel)]="Description" placeholder="Add Description"/>
+    </div>
+    <div class="form-control">
+        <label for="price">price</label>
+        <input type="number" name="price" id="price" [(ngModel)]="Price" placeholder="Add price"/>
+    </div>
+    <div class="form-control form-control-check">
+        <label for="reminder">Set reminder</label>
+        <input type="checkbox" name="Reminder" id="reminder" [(ngModel)]="reminder"/>
+    </div>
+    {{FoodType}}
+    <input type="submit" value="Save Task" class="btn btn-block"/>
+</form>
