@@ -37,6 +37,7 @@ namespace FoodTruckAPI.Controllers
         {
             return Ok(await _ft.MenuItems.ToListAsync());
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<MenuItem>> Get(int id)
         {
