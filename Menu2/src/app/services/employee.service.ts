@@ -17,8 +17,8 @@ const httpOptions ={
 })
 export class EmployeeService {
 
-  private employeeUrl ='https://localhost:7210/api/Employees';
-  private truckUrl='https://localhost:7210/api/Truck';
+  private employeeUrl ='http://footruckapi.azurewebsites.net/api/Employees';
+  private truckUrl='http://footruckapi.azurewebsites.net/api/Truck';
 
   constructor(private http:HttpClient) { }
 

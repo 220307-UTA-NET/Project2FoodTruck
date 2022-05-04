@@ -31,8 +31,7 @@ namespace FoodTruckAPI.Controllers
         [HttpGet("{IsActive}")]
         public async Task<ActionResult<MenuItem>> GetActive(bool IsActive)
         {
-<<<<<<< HEAD
-                              
+                             
             var menuItems=(from a in _ft.Trucks
                             join b in _ft.MenuItemLinks on a.MenuID equals b.MenuID
                             join c in _ft.MenuItems on b.MenuItemID equals c.MenuItemID
@@ -67,26 +66,18 @@ namespace FoodTruckAPI.Controllers
                              }).ToList();
 
             return Ok(employees);
-=======
-            var truck = _ft.Trucks
-            .Where(b => b.IsActive == isActive)
-            .FirstOrDefault<Truck>();
-            if (truck == null)
-                return BadRequest("menuItem not found.");
-            return Ok(truck);
          }
          
         //GET by ID
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Truck>> Get(int id)
-        {
-            var truck1 = await _ft.Trucks.FindAsync(id);
-            if (truck1 == null)
-            { return BadRequest("Truck not found."); }
-            else
-            { return Ok(truck1); }
->>>>>>> a9bcf12a04b97c55f6de11ba8b842c3bca6f97fe
-        }
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Truck>> Get(int id)
+        //{
+        //    var truck1 = await _ft.Trucks.FindAsync(id);
+        //    if (truck1 == null)
+        //    { return BadRequest("Truck not found."); }
+        //    else
+        //    { return Ok(truck1); }
+        //}
 
         //POST
         [HttpPost]
