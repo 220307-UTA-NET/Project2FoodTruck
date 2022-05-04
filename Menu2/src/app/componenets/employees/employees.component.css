@@ -2,11 +2,11 @@
     max-height: 450px;
     overflow: auto;
     width:400px;
-    float:left;
+    display: inline-block;
     margin-left: 10px;
   }
 
 .addEmployee{
-    float:right;
+  display: inline-block;
     margin-right: 40%;
 }
