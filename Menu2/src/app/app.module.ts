@@ -59,7 +59,7 @@ import { EmployeePortalComponent } from './pages/employee-portal/employee-portal
     TruckComponent,
     MenuPageComponent,
     EmployeePageComponent,
-    TruckButtonComponent
+    TruckButtonComponent,
     EmployeePortalComponent,
     
 
