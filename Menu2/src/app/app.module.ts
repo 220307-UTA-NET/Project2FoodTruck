@@ -35,6 +35,7 @@ import { EmployeePortalComponent } from './pages/employee-portal/employee-portal
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { EmployeePortalComponent } from './pages/employee-portal/employee-portal
     MenuPageComponent,
     EmployeePageComponent,
     EmployeePortalComponent,
+   
     
   
     
