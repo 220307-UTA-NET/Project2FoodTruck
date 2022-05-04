@@ -6,8 +6,7 @@
         (onDeleteEmployee)="deleteEmployee(employee)">
         </app-employee>
     </div>
-</div>
-<div>
-<div class="addEmployee" *ngIf="showEmployees">
-    <app-add-employee (onAddNewEmployee)="addNewEmployee($event)"></app-add-employee></div>
+    <div class="addEmployee" *ngIf="showEmployees">
+        <app-add-employee (onAddNewEmployee)="addNewEmployee($event)"></app-add-employee>
+    </div>
 </div>
