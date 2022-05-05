@@ -1,18 +1,13 @@
 .scroll {
     max-height: 450px;
     overflow: auto;
-    display:inline-block;
-    width:45%;
+    width:400px;
+    display: inline-block;
     margin-left: 10px;
     vertical-align: top;
   }
 
 .addEmployee{
-    max-height: 200px;
-    overflow: auto;
-    width: 40%;
-    max-height: 450px;
-    display:inline-block;
-    vertical-align: top;
-
+  display: inline-block;
+    margin-right: 40%;
 }

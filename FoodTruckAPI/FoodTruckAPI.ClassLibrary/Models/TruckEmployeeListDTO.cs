@@ -8,10 +8,10 @@ namespace FoodTruckAPI.ClassLibrary.Models
 {
     public class TruckEmployeeListDTO
     {
-        public string date {get; set;}       
+        public string? date {get; set;}       
         public int menuID {get; set;}
-        public string location { get; set;}
-        public List<Employee> employees {get; set;}
+        public string? location { get; set;}
+        public List<Employee>? employees {get; set;}
 
     }
 }
