@@ -22,7 +22,7 @@ namespace FoodTruckAPI.Controllers
 
         //Create a Menu - POST
         [HttpPost]
-        public async Task<ActionResult> Post(List<MenuItem> menu, string MenuName)
+        public async Task<ActionResult<Menu>> Post(List<MenuItem> menu, string MenuName)
         {    
             List<MenuItemLink> Links = new List<MenuItemLink>();
             foreach (MenuItem item in menu)
@@ -43,65 +43,67 @@ namespace FoodTruckAPI.Controllers
             {
                 await _ft.AddRangeAsync(menuAdd);
                 await _ft.SaveChangesAsync();
-                return Ok(menuAdd);                                    
+                return menuAdd;                                    
             }
             catch { return new ContentResult() { StatusCode = 500 }; }
         }
 
         //Update a Menu - PUT
-        [HttpPut]
-        public async Task<IActionResult> Put(List<MenuItem> menu, int id)
-        {
-            var menuList = (from m in _ft.MenuItems
-                            join n in _ft.MenuItemLinks
-                            on m.MenuItemID equals n.MenuItemID
-                            where n.MenuID == id
-                            select new
-                            {
-                                MenuItemID = m.MenuItemID,
-                                FoodType = m.FoodType,
-                                Name = m.Name,
-                                Description = m.Description,
-                                Price = m.Price
-                            }).ToList();
+        //[HttpPut]
+        //public async Task<IActionResult> Put(List<MenuItem> menu, int id)
+        //{
+        //    var menuList = (from m in _ft.MenuItems
+        //                    join n in _ft.MenuItemLinks
+        //                    on m.MenuItemID equals n.MenuItemID
+        //                    where n.MenuID == id
+        //                    select new
+        //                    {
+        //                        MenuItemID = m.MenuItemID,
+        //                        FoodType = m.FoodType,
+        //                        Name = m.Name,
+        //                        Description = m.Description,
+        //                        Price = m.Price
+        //                    }).ToList();
 
-            List<MenuItemLink> Links = new List<MenuItemLink>();
-            foreach (MenuItem item in menu)
-            {
-                Links.Add(new MenuItemLink()
-                {
-                    MenuItemID = item.MenuItemID,
-                });
-            }
-            try
-            {
-                await _ft.AddRangeAsync(new Menu()
-                {
-                   // MenuName = MenuName,
-                    Links = Links
-                });
-                await _ft.SaveChangesAsync();
-                return new ContentResult() { StatusCode = 200 };
-            }
-            catch { return new ContentResult() { StatusCode = 500 }; }
-        }
+        //    List<MenuItemLink> Links = new List<MenuItemLink>();
+        //    foreach (MenuItem item in menu)
+        //    {
+        //        Links.Add(new MenuItemLink()
+        //        {
+        //            MenuItemID = item.MenuItemID,
+        //        });
+        //    }
+        //    try
+        //    {
+        //        await _ft.AddRangeAsync(new Menu()
+        //        {
+        //           // MenuName = MenuName,
+        //            Links = Links
+        //        });
+        //        await _ft.SaveChangesAsync();
+        //        return new ContentResult() { StatusCode = 200 };
+        //    }
+        //    catch { return new ContentResult() { StatusCode = 500 }; }
+        //}
 
         //Get all menus -GET
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<ActionResult<List<Menu>>> Get()
         {
-            return Ok(await _ft.Menus.ToListAsync());
+            var menus = await _ft.Menus.ToListAsync();
+            return menus;
         }
+
         //Get one menu -GET
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<ActionResult<List<MenuItem>>> Get(int id)
         {
             var menuList = (from m in _ft.MenuItems
                             join n in _ft.MenuItemLinks
                             on m.MenuItemID equals n.MenuItemID
                             where n.MenuID == id orderby m.FoodType
-                            select new
+                            select new MenuItem()
                             {
                                 MenuItemID = m.MenuItemID,
                                 FoodType = m.FoodType,
@@ -111,7 +113,7 @@ namespace FoodTruckAPI.Controllers
                             }).ToList();
 
             //menuList.OrderBy(p => p.FoodType);
-            return Ok(menuList);         
+            return menuList;         
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)

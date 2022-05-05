@@ -21,9 +21,10 @@ namespace FoodTruckAPI.Controllers
 
         //GET ALL
         [HttpGet("all")]
-        public async Task<ActionResult<Employee>> Get()
+        public async Task<ActionResult<List<Employee>>> Get()
         {
-            return Ok(await _ft.Employees.ToListAsync());
+            var employees = await _ft.Employees.ToListAsync();
+            return employees;
         }
 
 
@@ -31,11 +32,11 @@ namespace FoodTruckAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> Get(int id)
         {          
-            var employee = await _ft.MenuItems.FindAsync(id);
+            var employee = await _ft.Employees.FindAsync(id);
             if (employee == null)
             { return BadRequest("Employeee not found."); }
             else
-            { return Ok(employee); }
+            { return employee; }
         }
 
         //POST

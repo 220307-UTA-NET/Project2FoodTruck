@@ -35,7 +35,7 @@ namespace FoodTruckAPI.Controllers
         [HttpGet("all")]
         public async Task<ActionResult<List<MenuItem>>> Get()
         {
-            return Ok(await _ft.MenuItems.ToListAsync());
+            return await _ft.MenuItems.ToListAsync();
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<MenuItem>> Get(int id)
@@ -44,7 +44,7 @@ namespace FoodTruckAPI.Controllers
             if (menuItem1 == null)
             { return BadRequest("Menu item not found."); }
             else
-            { return Ok(menuItem1); }
+            { return menuItem1; }
         }
             
 
@@ -56,11 +56,11 @@ namespace FoodTruckAPI.Controllers
                         .FirstOrDefault<MenuItem>();
             if (menuItem1 == null)
                 return BadRequest("menuItem not found.");
-            return Ok(menuItem1);
+            return menuItem1;
         }
 
         [HttpGet("foodtype")]
-        public async Task<ActionResult<MenuItem>> GetFoodType(string FoodType)
+        public async Task<ActionResult<List<MenuItem>>> GetFoodType(string FoodType)
         {
 
             var menuItem1 = _ft.MenuItems
@@ -68,7 +68,7 @@ namespace FoodTruckAPI.Controllers
                        
             if (menuItem1 == null)
                 return BadRequest("menuItem not found.");
-            return Ok(menuItem1.ToList());
+            return menuItem1.ToList();
         }
 
         // Won't be needed due to set up in angular currently
