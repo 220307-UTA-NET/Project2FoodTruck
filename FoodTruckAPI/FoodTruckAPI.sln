@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodTruckAPI", "FoodTruckAP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodTruckAPI.ClassLibrary", "FoodTruckAPI.ClassLibrary\FoodTruckAPI.ClassLibrary.csproj", "{90C168AB-F3C9-4553-AF95-2D7463BF9B15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{CF594B00-7268-4F89-9D5A-F7E13CBBD1CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{CF594B00-7268-4F89-9D5A-F7E13CBBD1CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
