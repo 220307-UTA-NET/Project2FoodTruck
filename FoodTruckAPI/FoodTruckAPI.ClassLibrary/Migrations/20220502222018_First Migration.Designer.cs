@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTruckAPI.ClassLibrary.Migrations
 {
     [DbContext(typeof(FoodTruckContext))]
-    [Migration("20220501141115_NewCreate")]
-    partial class NewCreate
+    [Migration("20220502222018_First Migration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

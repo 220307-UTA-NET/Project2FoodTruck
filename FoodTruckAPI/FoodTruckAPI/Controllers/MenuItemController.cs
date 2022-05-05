@@ -30,13 +30,14 @@ namespace FoodTruckAPI.Controllers
                 return menuItem;
             }
             catch { return new ContentResult() { StatusCode = 500 }; }
-                     
+
         }
         [HttpGet("all")]
         public async Task<ActionResult<List<MenuItem>>> Get()
         {
-            return Ok(await _ft.MenuItems.ToListAsync());
+            return await _ft.MenuItems.ToListAsync();
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<MenuItem>> Get(int id)
         {
@@ -44,42 +45,42 @@ namespace FoodTruckAPI.Controllers
             if (menuItem1 == null)
             { return BadRequest("Menu item not found."); }
             else
-            { return Ok(menuItem1); }
+            { return menuItem1; }
         }
             
 
         [HttpGet("name")]
         public async Task<ActionResult<MenuItem>> GetName(string Name)
         {
-            var menuItem1 = _ft.MenuItems
+            var menuItem1 = await _ft.MenuItems
                         .Where(b => b.Name == Name)
-                        .FirstOrDefault<MenuItem>();
+                        .FirstOrDefaultAsync<MenuItem>();
             if (menuItem1 == null)
                 return BadRequest("menuItem not found.");
-            return Ok(menuItem1);
+            return menuItem1;
         }
 
         [HttpGet("foodtype")]
-        public async Task<ActionResult<MenuItem>> GetFoodType(string FoodType)
+        public async Task<ActionResult<List<MenuItem>>> GetFoodType(string FoodType)
         {
 
-            var menuItem1 = _ft.MenuItems
-                        .Where(b => b.FoodType == FoodType);
+            var menuItem1 = await _ft.MenuItems
+                        .Where(b => b.FoodType == FoodType).ToListAsync();
                        
             if (menuItem1 == null)
                 return BadRequest("menuItem not found.");
-            return Ok(menuItem1.ToList());
+            return menuItem1.ToList();
         }
 
         // Won't be needed due to set up in angular currently
         [HttpPut("priceChangeName")]
         public async Task<ContentResult> UpdatePriceByName(MenuItem menuItem)
         {
-            var menuItem1 = _ft.MenuItems.
-                            First(b => b.Name == menuItem.Name);
+            var menuItem1 = await _ft.MenuItems.
+                            FirstAsync(b => b.Name == menuItem.Name);
 
             menuItem1.Price = menuItem.Price;
-            _ft.SaveChanges();
+            await _ft.SaveChangesAsync();
 
             return new ContentResult() { StatusCode = 200 };
         }
@@ -87,12 +88,13 @@ namespace FoodTruckAPI.Controllers
         [HttpPut("priceChangeID")]
         public async Task<ContentResult> UpdatePriceByID(MenuItem menuItem)
         {
-            var menuItem1 = _ft.MenuItems.
-                            First(b => b.MenuItemID == menuItem.MenuItemID);
+            var menuItem1 = await _ft.MenuItems.
+                            FirstAsync(b => b.MenuItemID == menuItem.MenuItemID);
+            
 
-            menuItem1.Price = menuItem.Price;
-            _ft.SaveChanges();
-
+                menuItem1.Price = menuItem.Price;
+                await _ft.SaveChangesAsync();
+            
             return new ContentResult() { StatusCode = 200 };
         }
         [HttpDelete("{id}")]

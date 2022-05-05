@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Employee } from 'src/app/Employee';
+import { Subscription } from 'rxjs';
+import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-employee',
@@ -8,14 +10,21 @@ import { Employee } from 'src/app/Employee';
 })
 export class EmployeeComponent implements OnInit {
   @Input() employee!:Employee;
+  @Output() onDeleteEmployee:EventEmitter<Employee>=new EventEmitter();
+  showTrucks!:Boolean;
+  subscription!:Subscription;
+
+
  
-  constructor() { }
+  constructor(private uiService:UIService) { }
 
   ngOnInit(): void {
+    this.subscription=this.uiService.onToggleShowTrucks().subscribe(value=>this.showTrucks=value);
   }
 
-  onDelete(employee:Employee){
-    
+  onDelete(employee:Employee)
+  {
+    this.onDeleteEmployee.emit(employee);
   }
 
 }

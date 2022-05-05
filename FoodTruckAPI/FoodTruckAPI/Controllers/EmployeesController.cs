@@ -21,9 +21,9 @@ namespace FoodTruckAPI.Controllers
 
         //GET ALL
         [HttpGet("all")]
-        public async Task<ActionResult<Employee>> Get()
+        public async Task<ActionResult<List<Employee>>> Get()
         {
-            return Ok(await _ft.Employees.ToListAsync());
+            return await _ft.Employees.ToListAsync();
         }
 
 
@@ -31,11 +31,11 @@ namespace FoodTruckAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> Get(int id)
         {          
-            var employee = await _ft.MenuItems.FindAsync(id);
+            var employee = await _ft.Employees.FindAsync(id);
             if (employee == null)
-            { return BadRequest("Menu item not found."); }
+            { return BadRequest("Employeee not found."); }
             else
-            { return Ok(employee); }
+            { return employee; }
         }
 
         //POST
@@ -53,6 +53,24 @@ namespace FoodTruckAPI.Controllers
         }
 
         //DELETE
+        [HttpDelete("{id}")]
+        public async Task<ContentResult> Delete(int id)
+        {
+            var employee = await _ft.Employees.FindAsync(id);
+            if (employee == null)
+                return new ContentResult()
+                {
+                    StatusCode = 400,
+                    Content = "Employee not found."
+                };
+
+            _ft.Employees.Remove(employee) ;
+            await _ft.SaveChangesAsync();
+            return new ContentResult()
+            {
+                StatusCode = 200,
+            };
+        }
 
     }
 }

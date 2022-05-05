@@ -1,0 +1,39 @@
+.addTruck{
+    display:inline-block;
+    width: 30%;
+    height:450px;
+    margin-left: 1%;
+    vertical-align: top;
+}
+
+form{
+    text-indent:10px;
+    margin: 10px 10px;
+}
+input{
+    margin: 3px 5px;
+}
+select{
+    margin: 3px 5px;
+}
+label{
+    padding-right: 6px;
+}
+
+.addEmp{
+    height:300px;
+    display:inline-block;
+    overflow: auto;
+    width: 30%;
+    vertical-align: top;
+}
+
+.scrollMenu {
+    max-height: 450px;
+    overflow: auto;
+    width:30%;
+    margin-left: 1%;
+    display:inline-block;
+    vertical-align: top;
+    cursor: pointer;
+  }

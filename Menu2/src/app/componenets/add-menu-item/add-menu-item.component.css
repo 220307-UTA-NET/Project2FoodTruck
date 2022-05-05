@@ -1,7 +1,6 @@
 .addMenu{
-    text-indent: 20px;
+    text-indent: 10px;
     margin-left: 20px;
-
     border-radius: 10px;
 }
 .btn{
@@ -9,14 +8,14 @@
 }
 
 form{
-    text-indent:25px;
-    margin: 15px 15px;
+    text-indent:10px;
+    margin: 10px 10px;
 }
 input{
-    margin: 5px 10px;
+    margin: 3px 5px;
 }
 select{
-    margin: 5px 10px;
+    margin: 3px 5px;
 }
 label{
     padding-right: 6px;

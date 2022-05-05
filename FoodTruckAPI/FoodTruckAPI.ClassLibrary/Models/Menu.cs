@@ -9,8 +9,8 @@ namespace FoodTruckAPI.ClassLibrary.Models
     public class Menu
     {
         public int MenuID { get; set; }
-        public string MenuName { get; set; }
-        public List<MenuItemLink> Links { get; set; }
+        public string? MenuName { get; set; }
+        public List<MenuItemLink>? Links { get; set; }
     
     }
 }

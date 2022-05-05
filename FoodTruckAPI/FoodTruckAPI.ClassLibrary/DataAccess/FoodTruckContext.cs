@@ -19,6 +19,12 @@ namespace FoodTruckAPI.ClassLibrary.DataAccess
         public DbSet<MenuItemLink> MenuItemLinks { get; set; }
         public DbSet<EmployeeTruckLink> EmployeeTruckLinks { get; set; }
 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("foodtruck");
+        }
+
         //protected override void OnModelCreating(ModelBuilder modelbuilder)
         //{
 
@@ -29,6 +35,5 @@ namespace FoodTruckAPI.ClassLibrary.DataAccess
 
         //    base.OnModelCreating(modelbuilder);
         //}
-
     }
 }

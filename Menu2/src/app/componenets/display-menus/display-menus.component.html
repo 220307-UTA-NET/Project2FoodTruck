@@ -1,11 +1,16 @@
 
-<div class="displayMenus" *ngIf="showMenus">    
-    <div class="eachMenu">       
+<table class="displayMenus" *ngIf="showMenus || showTrucks">
+    <tbody>   
+    <div class="eachMenu">  
+        <tr>
+        <td>   
         <input type="checkbox" class="btn-small"(click)="displayOneMenu(menu)"/>
-        
-        {{menu.menuName}}
+        </td>
+        <td style="width:175px">{{menu.menuName}}</td>  
+        <td>
         <button class="btn-delete" (click)="deleteMenu(menu)">delete</button>
-        
+        </td>
+        </tr>
     </div>
 
     <div *ngIf="displayingOneMenu" >        
@@ -13,5 +18,6 @@
         {{menuItem.name}}- ${{menuItem.price}}
         </div>
     </div>
-</div>
+</tbody> 
+</table>
 

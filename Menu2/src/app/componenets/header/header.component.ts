@@ -14,18 +14,21 @@ export class HeaderComponent implements OnInit {
   showMenus!:boolean;
   showAddOptions!:boolean;
   showEmployees!:boolean;
+  showTrucks!:boolean;
   subscription!: Subscription;
   menuItemService!:MenuItemService;
 
 
   constructor(private uiService:UIService) {
+   
+   }
+
+  ngOnInit(): void {
     this.subscription=this.uiService.onToggleShowMenuItems().subscribe(value=>this.showMenuItems=value);
     this.subscription=this.uiService.onToggleShowMenus().subscribe(value=>this.showMenus=value);
     this.subscription=this.uiService.onToggleShowAddOptions().subscribe(value=>this.showAddOptions=value);
     this.subscription=this.uiService.onToggleShowEmployees().subscribe(value=>this.showEmployees=value);
-   }
-
-  ngOnInit(): void {
+    this.subscription=this.uiService.onToggleShowTrucks().subscribe(value=>this.showTrucks=value);
   }
 
  
@@ -43,6 +46,9 @@ export class HeaderComponent implements OnInit {
   toggleEmployees(){
     this.uiService.toggleShowEmployess();
   }
+  toggleTrucks(){
+    this.uiService.toggleShowTrucks();
+  }
 
   resetShowAddOptions(){
     this.uiService.resetToggleShowAddOptions();
@@ -51,6 +57,9 @@ export class HeaderComponent implements OnInit {
   resetShowMenus(){
     this.uiService.resetToggleShowMenus();
   }
+
+
+ 
 
 
 }

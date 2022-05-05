@@ -1,29 +1,26 @@
 .scroll {
-    max-height: 425px;
-    overflow: auto;
-    width:40%;
-    float:left;
-    margin-left: 10px;
-  }
+  max-height: 425px;
+  overflow: auto;
+  width:32%;
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: top;
+}
 
-  .menu{
-    float: left;
-    text-align: center;
-    height: 470;
-    width:65%;
-    padding: 5px 10px;
-    
-  }
+.addOptions{
+  max-height: 450px;
+  overflow: auto;
+  display: inline-block;
+  width:32%;
+  margin-top: 0%;
+  vertical-align: top;
+}
 
-  .addOptions{
-    float: left;
-  }
-
-  .scrollMenu {
-    max-height: 450px;
-    overflow: auto;
-    width:30%;
-    float:right;
-    margin-right: 20px;
-  }
-
+.scrollMenu {
+  max-height: 450px;
+  overflow: auto;
+  width:32%;
+  display: inline-block;
+  margin-right: 20px;
+  vertical-align: top;
+}
