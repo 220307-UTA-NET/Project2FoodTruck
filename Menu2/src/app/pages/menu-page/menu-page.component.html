@@ -8,7 +8,7 @@
     </h2>
     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
       <div class="accordion-body"  *ngFor="let item of menuItems1;let i = index">
-        <tr>{{item.name}} ${{item.price}}</tr>     
+        <tr>{{item.name}} {{item.price | currency}}</tr>     
       </div>
     </div>
   </div>
