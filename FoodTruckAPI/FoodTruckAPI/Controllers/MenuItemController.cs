@@ -35,7 +35,7 @@ namespace FoodTruckAPI.Controllers
         [HttpGet("all")]
         public async Task<ActionResult<List<MenuItem>>> Get()
         {
-            return await _ft.MenuItems.ToListAsync();
+            return await _ft.MenuItems.OrderBy(i=>i.Name).ToListAsync();
         }
 
         [HttpGet("{id}")]
