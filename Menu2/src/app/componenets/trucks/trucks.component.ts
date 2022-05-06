@@ -79,6 +79,17 @@ export class TrucksComponent implements OnInit {
     this.employeeService.createTruck(newTruck).subscribe((truck)=>(this.trucks.push(truck)));
   }
   setActiveTruck(truck:Truck){
-    this.employeeService.setTruckToActive(truck).subscribe((trucks)=>this.trucks=trucks);
+    this.employeeService.setTruckToActive(truck).subscribe();
+    for (let i=0; i<this.trucks.length; i++)
+    {
+      if(truck.truckID===this.trucks[i].truckID)
+      {
+        this.trucks[i].isActive=true;
+      }
+      else
+      {
+        this.trucks[i].isActive=false;
+      }
+    }
   }
 }

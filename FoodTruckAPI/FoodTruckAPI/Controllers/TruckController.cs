@@ -21,50 +21,50 @@ namespace FoodTruckAPI.Controllers
 
         //GET ALL
         [HttpGet("all")]
-        public async Task<ActionResult<Truck>> Get()
+        public async Task<ActionResult<List<Truck>>> Get()
         {
-            return Ok(await _ft.Trucks.ToListAsync());
+            return await _ft.Trucks.OrderByDescending(i=>i.Day).Take(5).ToListAsync();
         }
         
         //GETACTIVE TRUCK
         [HttpGet("{IsActive}")]
-        public async Task<ActionResult<MenuItem>> GetActive(bool IsActive)
+        public async Task<ActionResult<List<MenuItem>>> GetActive(bool IsActive)
         {
                              
-            var menuItems=(from a in _ft.Trucks
+            var menuItems= await (from a in _ft.Trucks
                             join b in _ft.MenuItemLinks on a.MenuID equals b.MenuID
                             join c in _ft.MenuItems on b.MenuItemID equals c.MenuItemID
                             where a.IsActive==true orderby c.FoodType
-                           select new
+                           select new MenuItem()
                             {
                                 MenuItemID = c.MenuItemID,
                                 FoodType = c.FoodType,
                                 Name = c.Name,
                                 Description = c.Description,
                                 Price = c.Price
-                            }).ToList();
+                            }).ToListAsync();
 
 
             if (menuItems == null)
                 return BadRequest("menuItems not found.");
-            return Ok(menuItems);
+            return menuItems;
         }
 
         [HttpGet("employees{id}")]
-        public async Task<ActionResult<Employee>> GetTruckEmployees(int id)
+        public async Task<ActionResult<List<Employee>>> GetTruckEmployees(int id)
         {
-            var employees = (from m in _ft.Employees
+            var employees = await (from m in _ft.Employees
                              join n in _ft.EmployeeTruckLinks
                              on m.EmployeeID equals n.EmployeeID
                              where n.TruckID == id
-                             select new
+                             select new Employee()
                              {
                                  EmployeeID = m.EmployeeID,
                                  Name = m.Name,
                                  PhoneNumber = m.PhoneNumber,
-                             }).ToList();
+                             }).ToListAsync();
 
-            return Ok(employees);
+            return employees;
         }
 
         //POST
@@ -102,13 +102,13 @@ namespace FoodTruckAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<Truck>>Put(int id)
         {
-            var truckActive = _ft.Trucks.
-                            First(b => b.TruckID == id);
+            var truckActive = await _ft.Trucks.
+                            FirstAsync(b => b.TruckID == id);
 
             truckActive.IsActive = true;         
 
-            var trucksInactive = _ft.Trucks.
-                            Where(b => b.TruckID != id);
+            var trucksInactive = await _ft.Trucks.
+                            Where(b => b.TruckID != id).ToListAsync();
             foreach (var t in trucksInactive)
             {
                 t.IsActive = false;

@@ -1,7 +1,8 @@
 <table class="truckTable">
 <tr>
+<!--<td valign="top">Live: {{truck.isActive}} </td>-->
 <td valign="top"><button class="btn-small"*ngIf="truck.isActive===true">Live</button></td>
-<td valign="top"><button class="btn-small" (click)="setToActive(truck)" *ngIf="truck.isActive===false">Make Live</button></td>
+<td valign="top"><button class="btn-small" (click)="setToActive(truck)"*ngIf="truck.isActive===false">Make Live</button></td>
 <td valign="top">{{truck.day}}  </td>
 <td valign="top"> Menu-{{truck.menuID}}</td>
 <td valign="top">Location-{{truck.location}}</td>

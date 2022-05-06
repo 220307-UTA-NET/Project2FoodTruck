@@ -14,8 +14,8 @@ const httpOptions ={
   providedIn: 'root'
 })
 export class MenuItemService {
-  private menuItemUrl = 'http://footruckapi.azurewebsites.net/api/MenuItem'
-  private menuUrl ='http://footruckapi.azurewebsites.net/api/Menus'
+  private menuItemUrl = 'https://footruckapi.azurewebsites.net/api/MenuItem'
+  private menuUrl ='https://footruckapi.azurewebsites.net/api/Menus'
 
 
   constructor(private http:HttpClient) { }
