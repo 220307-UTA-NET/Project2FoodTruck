@@ -1,40 +1,46 @@
 # Project2FoodTruck
 Food Truck Web App
 
-We are building a website for a food truck. Customers will be able to use the website to look up the food truck menu and where the truck is located. The food truck managers will be able to make changes to their inventory, employee schedules, change menus, and update food truck locations. Employees of the food truck will be able to check their schedule on the website.
+We are building a website for a food truck. Customers will be able to use the website to look up the food truck menu and where the truck is located. The food truck managers will be able to make changes to their menu items, employee schedules, change menus, and update food truck locations. Employees of the food truck will be able to check their schedule on the website.
 
 User Stories):
 MVP
 
 	Menu
 
-		As the customer I want to see menu items on the website
+		As the customer I want to see menu items on the website.
 
-		As the customer I want to see the menu item description
+		As the customer I want to see the menu item description.
 
-		As the customer I want  to menu time price
+		As the customer I want to see menu prices.
 
 		As the employer I want to be able to update a menu item.
 
-		As the employer I want to be able to update the price of a menu item
+		As the employer I want to be able to create a menu item.
 
-		As the employer I want to be able to update the quantity of a menu item
+		As the employer I want to be able to create a menu from the menu items.
 
-		(stretch)Customer wants to know if menu item is DF/GF/NF
+		As the employer I want to be able to delete menu items or the entire menu.
 
-		(stretch)Employer can track the sales and see order history
+		As the employer I want to be able to update the price of a menu item.
 
-	Inventory
+		(stretch)Customer wants to know if menu item is DF/GF/NF.
 
-		As the employer I want to update the inventory of dry goods
+		(stretch)Employer can track the sales and see order history.
 
-		As the employer I want dry goods to decrement (plate/napkins) as they are used
+	Scheduling
 
-		As the employer I want to be able to add to inventory of dry goods
+		As the employer I want to create daily schedules.
 
-		As the employer I want to be able to see the price of dry goods(update price)
+		As the employer I want assign varying employees to the schedule.
 
-		(stretch) the employer wants to track costs/spending of dry goods and compare with sales
+		As the employer I want to be able to add and remove employees from the system.
+
+		As the employer I want to be able to choose different menus each day.
+
+		As the employer I want to be able to choose different locations each day for the truck.
+
+		
 
 	Stretch Goals
 
